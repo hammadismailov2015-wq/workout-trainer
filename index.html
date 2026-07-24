@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#0f172a">
+<title>Домашний Тренажёр 💪</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+
+  <!-- ЭКРАН: Главная -->
+  <section class="screen active" id="screen-home">
+    <header class="app-header">
+      <h1>💪 Тренажёр</h1>
+      <p class="subtitle">Тренировки дома без оборудования</p>
+    </header>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <span class="stat-value" id="stat-workouts">0</span>
+        <span class="stat-label">тренировок</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-value" id="stat-streak">0</span>
+        <span class="stat-label">дней подряд</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-value" id="stat-minutes">0</span>
+        <span class="stat-label">минут всего</span>
+      </div>
+    </div>
+
+    <h2 class="section-title">Готовые программы</h2>
+    <div class="program-list" id="program-list"></div>
+
+    <h2 class="section-title">Свободная тренировка</h2>
+    <div class="program-list">
+      <button class="program-card custom" id="btn-custom">
+        <span class="program-emoji">⚙️</span>
+        <span class="program-name">Собрать свою</span>
+        <span class="program-meta">выбери упражнения</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ЭКРАН: Конструктор своей тренировки -->
+  <section class="screen" id="screen-builder">
+    <header class="screen-header">
+      <button class="back-btn" data-goto="home">‹ Назад</button>
+      <h2>Своя тренировка</h2>
+    </header>
+    <div class="builder-settings">
+      <label class="setting">
+        <span>Работа (сек)</span>
+        <input type="number" id="set-work" value="40" min="5" max="300">
+      </label>
+      <label class="setting">
+        <span>Отдых (сек)</span>
+        <input type="number" id="set-rest" value="20" min="0" max="300">
+      </label>
+      <label class="setting">
+        <span>Кругов</span>
+        <input type="number" id="set-rounds" value="2" min="1" max="10">
+      </label>
+    </div>
+    <p class="hint">Выбери упражнения (нажми, чтобы добавить):</p>
+    <div class="exercise-grid" id="exercise-grid"></div>
+    <div class="builder-footer">
+      <span id="builder-count">Выбрано: 0</span>
+      <button class="btn-primary" id="btn-start-custom" disabled>Начать</button>
+    </div>
+  </section>
+
+  <!-- ЭКРАН: Тренировка -->
+  <section class="screen workout-screen" id="screen-workout">
+    <div class="workout-top">
+      <button class="close-btn" id="btn-quit">✕</button>
+      <div class="round-badge" id="round-badge">Круг 1/2</div>
+    </div>
+
+    <div class="workout-body" id="workout-body">
+      <p class="phase-label" id="phase-label">Приготовься</p>
+      <div class="exercise-emoji" id="ex-emoji">🏃</div>
+      <h2 class="exercise-name" id="ex-name">Разминка</h2>
+      <div class="timer-ring">
+        <svg viewBox="0 0 120 120">
+          <circle class="ring-bg" cx="60" cy="60" r="54"></circle>
+          <circle class="ring-fg" id="ring-fg" cx="60" cy="60" r="54"></circle>
+        </svg>
+        <span class="timer-text" id="timer-text">10</span>
+      </div>
+      <p class="next-up" id="next-up"></p>
+    </div>
+
+    <div class="workout-controls">
+      <button class="ctrl-btn" id="btn-prev">⏮</button>
+      <button class="ctrl-btn big" id="btn-pause">⏸</button>
+      <button class="ctrl-btn" id="btn-next">⏭</button>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+  </section>
+
+  <!-- ЭКРАН: Итоги -->
+  <section class="screen" id="screen-done">
+    <div class="done-content">
+      <div class="done-emoji">🎉</div>
+      <h2>Тренировка завершена!</h2>
+      <div class="done-stats">
+        <div><strong id="done-time">0:00</strong><span>время</span></div>
+        <div><strong id="done-ex">0</strong><span>упражнений</span></div>
+        <div><strong id="done-cal">0</strong><span>ккал ≈</span></div>
+      </div>
+      <button class="btn-primary" data-goto="home">На главную</button>
+    </div>
+  </section>
+
+</div>
+<script src="app.js"></script>
+</body>
+</html>
