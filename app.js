@@ -236,7 +236,13 @@ function enterStep() {
 // Переключить анимацию робота-тренера
 function setRobotAnim(anim) {
   const robot = document.getElementById("robot");
-  if (robot) robot.setAttribute("class", "robot anim-" + anim);
+  const stage = document.getElementById("robot-stage");
+  if (anim === "pushup") {
+    stage.classList.add("pushup-mode");        // показать профильного робота
+  } else {
+    stage.classList.remove("pushup-mode");
+    if (robot) robot.setAttribute("class", "robot anim-" + anim);
+  }
 }
 
 function findNextWork(i) {

@@ -173,6 +173,47 @@
             </g>
           </g>
         </svg>
+        <!-- Отжимания: робот в профиль, лицом и животом в пол -->
+        <svg class="robot-side" id="robot-pushup" viewBox="0 0 200 250" aria-hidden="true">
+          <defs>
+            <linearGradient id="pmetal" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#f1f5f9"/><stop offset=".5" stop-color="#94a3b8"/><stop offset="1" stop-color="#475569"/>
+            </linearGradient>
+            <linearGradient id="pmetal2" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#cbd5e1"/><stop offset="1" stop-color="#334155"/>
+            </linearGradient>
+          </defs>
+          <line x1="26" y1="212" x2="176" y2="212" stroke="#334155" stroke-width="4" stroke-linecap="round"/>
+          <g id="pu-body">
+            <!-- дальние конечности (за корпусом, темнее) -->
+            <rect x="118" y="150" width="12" height="58" rx="6" fill="url(#pmetal2)"/> <!-- дальняя рука -->
+            <rect x="70" y="150" width="13" height="58" rx="6" fill="url(#pmetal2)"/>  <!-- дальняя нога -->
+            <!-- корпус-планка -->
+            <rect x="52" y="148" width="102" height="28" rx="14" fill="url(#pmetal)" stroke="#cbd5e1" stroke-width="1.5"/>
+            <!-- панель на спине (верх) -->
+            <rect x="66" y="151" width="30" height="6" rx="3" fill="#64748b" opacity=".55"/>
+            <!-- пресс/кубики на животе (низ) -->
+            <g stroke="#334155" stroke-width="2" opacity=".75">
+              <line x1="92" y1="168" x2="128" y2="168"/>
+              <line x1="100" y1="164" x2="100" y2="174"/>
+              <line x1="110" y1="164" x2="110" y2="174"/>
+              <line x1="120" y1="164" x2="120" y2="174"/>
+            </g>
+            <!-- ближние конечности (перед корпусом, к полу) -->
+            <g id="pu-arm"><rect x="132" y="158" width="14" height="52" rx="7" fill="url(#pmetal)"/><circle cx="139" cy="208" r="7" fill="#475569"/></g>
+            <rect x="58" y="158" width="15" height="52" rx="7" fill="url(#pmetal)"/>
+            <rect x="52" y="204" width="27" height="10" rx="4" fill="#1e293b"/> <!-- стопа -->
+            <!-- голова опущена: лицо и глаз смотрят вниз в пол -->
+            <g id="pu-head">
+              <line x1="178" y1="150" x2="184" y2="140" stroke="#94a3b8" stroke-width="3"/>
+              <circle class="r-antenna" cx="186" cy="137" r="5" fill="#22d3ee"/>
+              <path d="M150,150 Q150,131 169,130 Q189,130 190,151 Q190,172 170,179 Q151,178 150,158 Z"
+                    fill="url(#pmetal)" stroke="#cbd5e1" stroke-width="1.5"/>
+              <circle class="r-eye" cx="162" cy="172" r="6.5" fill="#22d3ee"/>
+              <circle cx="162" cy="172" r="2.3" fill="#ecfeff"/>
+            </g>
+          </g>
+        </svg>
       </div>
       <h2 class="exercise-name" id="ex-name">Разминка</h2>
       <div class="timer-ring">

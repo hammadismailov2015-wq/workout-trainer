@@ -182,26 +182,17 @@ body {
 @keyframes sqArmL { 0%,100% { transform: rotate(0); } 50% { transform: rotate(-75deg); } }
 @keyframes sqArmR { 0%,100% { transform: rotate(0); } 50% { transform: rotate(75deg); } }
 
-/* Отжимания — робот боком в упоре лёжа у пола; корпус опускается, руки сгибаются */
-.r-ground { opacity: 0; }
-.anim-pushup .r-ground { opacity: 1; }
-.anim-pushup .r-shadow { opacity: 0; }
-.anim-pushup #r-body { transform-origin: 50% 50%; animation: puDip 1.1s ease-in-out infinite; }
-@keyframes puDip {
-  0%,100% { transform: translate(2px, 86px) rotate(90deg); }   /* верхняя точка (руки прямые) */
-  50%     { transform: translate(2px, 104px) rotate(90deg); }  /* нижняя точка (корпус у пола) */
+/* Отжимания — отдельный робот в профиль (лицом и животом в пол) */
+.robot-side { display: none; height: 195px; width: auto; overflow: visible; }
+.robot-stage.pushup-mode #robot { display: none; }
+.robot-stage.pushup-mode .robot-side { display: block; }
+#pu-body { animation: puSideDip 1.05s ease-in-out infinite; }
+@keyframes puSideDip {
+  0%,100% { transform: translateY(0); }     /* верхняя точка */
+  50%     { transform: translateY(15px); }  /* нижняя точка — корпус к полу */
 }
-/* руки строго вниз под плечами; при опускании сгибаются */
-.anim-pushup #r-arm-l, .anim-pushup #r-arm-r { animation: puArm 1.1s ease-in-out infinite; }
-@keyframes puArm {
-  0%,100% { transform: rotate(-90deg); }
-  50%     { transform: rotate(-64deg); }
-}
-/* ноги упираются стопами в пол слева */
-.anim-pushup #r-leg-l, .anim-pushup #r-leg-r { transform: rotate(-64deg); }
-/* голова опущена «носом» в пол; лицо к полу — к зрителю не видно */
-.anim-pushup #r-head { transform-box: fill-box; transform-origin: 50% 100%; transform: rotate(45deg); }
-.anim-pushup #r-face { opacity: 0; }
+/* голова свисает вниз, глаз смотрит в пол */
+#pu-head { transform-box: fill-box; transform-origin: 6% 42%; transform: rotate(40deg); }
 
 /* Прыжки / джампинг-джек */
 .anim-jump #r-body { animation: hop .6s ease-in-out infinite; }
