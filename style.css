@@ -199,6 +199,8 @@ body {
 }
 /* ноги упираются стопами в пол слева */
 .anim-pushup #r-leg-l, .anim-pushup #r-leg-r { transform: rotate(-64deg); }
+/* голова опущена лицом в пол */
+.anim-pushup #r-head { transform-box: fill-box; transform-origin: 50% 100%; transform: rotate(80deg); }
 
 /* Прыжки / джампинг-джек */
 .anim-jump #r-body { animation: hop .6s ease-in-out infinite; }
