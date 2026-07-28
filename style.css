@@ -182,17 +182,32 @@ body {
 @keyframes sqArmL { 0%,100% { transform: rotate(0); } 50% { transform: rotate(-75deg); } }
 @keyframes sqArmR { 0%,100% { transform: rotate(0); } 50% { transform: rotate(75deg); } }
 
-/* Отжимания — отдельный робот в профиль (лицом и животом в пол) */
+/* Профильные роботы (лицом/животом к полу): отжимания, планка, скалолаз, супермен */
 .robot-side { display: none; height: 195px; width: auto; overflow: visible; }
-.robot-stage.pushup-mode #robot { display: none; }
-.robot-stage.pushup-mode .robot-side { display: block; }
-#pu-body { animation: puSideDip 1.05s ease-in-out infinite; }
-@keyframes puSideDip {
-  0%,100% { transform: translateY(0); }     /* верхняя точка */
-  50%     { transform: translateY(15px); }  /* нижняя точка — корпус к полу */
-}
+.pushup-mode #robot, .plank-mode #robot, .mountain-mode #robot, .superman-mode #robot { display: none; }
+.pushup-mode #robot-pushup, .plank-mode #robot-pushup, .mountain-mode #robot-pushup { display: block; }
+.superman-mode #robot-superman { display: block; }
+
 /* голова свисает вниз, глаз смотрит в пол */
 #pu-head { transform-box: fill-box; transform-origin: 6% 42%; transform: rotate(40deg); }
+.pu-leg { transform-box: fill-box; transform-origin: 50% 0%; }
+
+/* Отжимания — корпус ходит вверх-вниз */
+.pushup-mode #pu-body { animation: puSideDip 1.05s ease-in-out infinite; }
+@keyframes puSideDip { 0%,100% { transform: translateY(0); } 50% { transform: translateY(15px); } }
+
+/* Планка — держим упор, лёгкая дрожь */
+.plank-mode #pu-body { animation: plankHold 1s ease-in-out infinite; }
+@keyframes plankHold { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-2px); } }
+
+/* Скалолаз — колени поочерёдно к груди */
+.mountain-mode #pu-leg-near { animation: mtnKnee .62s ease-in-out infinite; }
+.mountain-mode #pu-leg-far  { animation: mtnKnee .62s ease-in-out infinite; animation-delay: -.31s; }
+@keyframes mtnKnee { 0%,100% { transform: rotate(0); } 50% { transform: rotate(-52deg); } }
+
+/* Супермен — руки, ноги и голова поднимаются и опускаются («полёт») */
+.superman-mode #sm-lift { animation: smFly 1.6s ease-in-out infinite; }
+@keyframes smFly { 0%,100% { transform: translateY(7px); } 50% { transform: translateY(-7px); } }
 
 /* Прыжки / джампинг-джек */
 .anim-jump #r-body { animation: hop .6s ease-in-out infinite; }

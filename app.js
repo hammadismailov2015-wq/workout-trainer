@@ -8,14 +8,14 @@ const EXERCISES = {
   squats:    { name: "Приседания",     ico: "🦵", cal: 8,  anim: "squat" },
   pushups:   { name: "Отжимания",      ico: "💪", cal: 8,  anim: "pushup" },
   abs:       { name: "Пресс",          ico: "🔥", cal: 7,  anim: "core" },
-  plank:     { name: "Планка",         ico: "🧘", cal: 5,  anim: "hold" },
+  plank:     { name: "Планка",         ico: "🧘", cal: 5,  anim: "plank" },
   lunges:    { name: "Выпады",         ico: "🚶", cal: 8,  anim: "squat" },
   burpee:    { name: "Бёрпи",          ico: "⚡", cal: 12, anim: "jump" },
   jumpjack:  { name: "Джампинг-джек",  ico: "🤸", cal: 10, anim: "jump" },
-  mountain:  { name: "Скалолаз",       ico: "⛰️", cal: 10, anim: "run" },
+  mountain:  { name: "Скалолаз",       ico: "⛰️", cal: 10, anim: "mountain" },
   legraise:  { name: "Подъём ног",     ico: "🦿", cal: 6,  anim: "core" },
   highknees: { name: "Бег с колен.",   ico: "🏃", cal: 11, anim: "run" },
-  superman:  { name: "Супермен",       ico: "🦸", cal: 5,  anim: "hold" },
+  superman:  { name: "Супермен",       ico: "🦸", cal: 5,  anim: "superman" },
   wallsit:   { name: "Стульчик",       ico: "🪑", cal: 6,  anim: "squat" },
 };
 
@@ -234,14 +234,21 @@ function enterStep() {
 }
 
 // Переключить анимацию робота-тренера
+// Упражнения «в профиль» (лицом/животом к полу) показываются отдельными роботами
+const SIDE_MODES = {
+  pushup: "pushup-mode",
+  plank: "plank-mode",
+  mountain: "mountain-mode",
+  superman: "superman-mode",
+};
 function setRobotAnim(anim) {
   const robot = document.getElementById("robot");
   const stage = document.getElementById("robot-stage");
-  if (anim === "pushup") {
-    stage.classList.add("pushup-mode");        // показать профильного робота
-  } else {
-    stage.classList.remove("pushup-mode");
-    if (robot) robot.setAttribute("class", "robot anim-" + anim);
+  stage.classList.remove("pushup-mode", "plank-mode", "mountain-mode", "superman-mode");
+  if (SIDE_MODES[anim]) {
+    stage.classList.add(SIDE_MODES[anim]);     // профильный робот
+  } else if (robot) {
+    robot.setAttribute("class", "robot anim-" + anim);
   }
 }
 
