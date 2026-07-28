@@ -400,8 +400,27 @@ updateVoiceBtn();
 //  PWA — установка на телефон и офлайн-режим
 // ============================================================
 if ("serviceWorker" in navigator) {
+  // Если управляющий SW уже был — при появлении нового один раз перезагружаем страницу
+  if (navigator.serviceWorker.controller) {
+    let refreshing = false;
+    navigator.serviceWorker.addEventListener("controllerchange", () => {
+      if (refreshing) return;
+      refreshing = true;
+      location.reload();
+    });
+  }
   window.addEventListener("load", () => {
-    navigator.serviceWorker.register("sw.js").catch(() => {});
+    navigator.serviceWorker.register("sw.js").then((reg) => {
+      reg.update();
+      // Если новый SW уже ждёт — активируем немедленно
+      if (reg.waiting) reg.waiting.postMessage("skip");
+      reg.addEventListener("updatefound", () => {
+        const nw = reg.installing;
+        if (nw) nw.addEventListener("statechange", () => {
+          if (nw.state === "installed" && navigator.serviceWorker.controller) nw.postMessage("skip");
+        });
+      });
+    }).catch(() => {});
   });
 }
 
