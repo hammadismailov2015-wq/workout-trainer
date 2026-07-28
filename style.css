@@ -197,8 +197,8 @@ body {
   0%,100% { transform: rotate(-90deg); }
   50%     { transform: rotate(-64deg); }
 }
-/* ноги в линию с плоским корпусом, стопы слегка в пол */
-.anim-pushup #r-leg-l, .anim-pushup #r-leg-r { transform: rotate(10deg); }
+/* ноги упираются стопами в пол слева */
+.anim-pushup #r-leg-l, .anim-pushup #r-leg-r { transform: rotate(-64deg); }
 
 /* Прыжки / джампинг-джек */
 .anim-jump #r-body { animation: hop .6s ease-in-out infinite; }
