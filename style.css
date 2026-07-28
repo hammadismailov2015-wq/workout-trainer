@@ -186,19 +186,19 @@ body {
 .r-ground { opacity: 0; }
 .anim-pushup .r-ground { opacity: 1; }
 .anim-pushup .r-shadow { opacity: 0; }
-.anim-pushup #r-body { transform-origin: 50% 50%; animation: puDip 1.05s ease-in-out infinite; }
+.anim-pushup #r-body { transform-origin: 50% 50%; animation: puDip 1.1s ease-in-out infinite; }
 @keyframes puDip {
-  0%,100% { transform: translate(4px, 82px) rotate(90deg); }   /* верхняя точка */
-  50%     { transform: translate(4px, 100px) rotate(90deg); }  /* нижняя точка */
+  0%,100% { transform: translate(2px, 86px) rotate(90deg); }   /* верхняя точка (руки прямые) */
+  50%     { transform: translate(2px, 104px) rotate(90deg); }  /* нижняя точка (корпус у пола) */
 }
-/* руки: кисти стоят на полу, локти сгибаются при опускании */
-.anim-pushup #r-arm-l, .anim-pushup #r-arm-r { animation: puArm 1.05s ease-in-out infinite; }
+/* руки строго вниз под плечами; при опускании сгибаются */
+.anim-pushup #r-arm-l, .anim-pushup #r-arm-r { animation: puArm 1.1s ease-in-out infinite; }
 @keyframes puArm {
-  0%,100% { transform: rotate(-80deg); }
-  50%     { transform: rotate(-58deg); }
+  0%,100% { transform: rotate(-90deg); }
+  50%     { transform: rotate(-64deg); }
 }
-/* ноги прямые в линию с корпусом */
-.anim-pushup #r-leg-l, .anim-pushup #r-leg-r { transform: rotate(-3deg); }
+/* ноги в линию с плоским корпусом, стопы слегка в пол */
+.anim-pushup #r-leg-l, .anim-pushup #r-leg-r { transform: rotate(10deg); }
 
 /* Прыжки / джампинг-джек */
 .anim-jump #r-body { animation: hop .6s ease-in-out infinite; }
