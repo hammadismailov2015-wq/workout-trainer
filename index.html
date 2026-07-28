@@ -5,6 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#0f172a">
 <title>Домашний Тренажёр 💪</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Тренажёр">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,6 +20,7 @@
   <!-- ЭКРАН: Главная -->
   <section class="screen active" id="screen-home">
     <header class="app-header">
+      <button class="voice-toggle" id="voice-toggle" title="Голос тренера" aria-label="Голос тренера">🔊</button>
       <h1>💪 Тренажёр</h1>
       <p class="subtitle">Тренировки дома без оборудования</p>
     </header>
@@ -82,7 +90,51 @@
 
     <div class="workout-body" id="workout-body">
       <p class="phase-label" id="phase-label">Приготовься</p>
-      <div class="exercise-emoji" id="ex-emoji">🏃</div>
+      <div class="robot-stage" id="robot-stage">
+        <svg class="robot" id="robot" viewBox="0 0 200 250" aria-hidden="true">
+          <defs>
+            <linearGradient id="metal" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#f1f5f9"/>
+              <stop offset="0.5" stop-color="#94a3b8"/>
+              <stop offset="1" stop-color="#475569"/>
+            </linearGradient>
+            <linearGradient id="metal2" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#cbd5e1"/>
+              <stop offset="1" stop-color="#334155"/>
+            </linearGradient>
+          </defs>
+          <ellipse class="r-shadow" id="r-shadow" cx="100" cy="238" rx="52" ry="8"/>
+          <g id="r-body">
+            <!-- ноги -->
+            <g class="limb" id="r-leg-l"><rect x="83" y="150" width="14" height="50" rx="7" fill="url(#metal2)"/><rect x="79" y="195" width="22" height="11" rx="5" fill="#1e293b"/></g>
+            <g class="limb" id="r-leg-r"><rect x="103" y="150" width="14" height="50" rx="7" fill="url(#metal2)"/><rect x="99" y="195" width="22" height="11" rx="5" fill="#1e293b"/></g>
+            <!-- руки -->
+            <g class="limb" id="r-arm-l"><rect x="62" y="90" width="12" height="46" rx="6" fill="url(#metal2)"/><circle cx="68" cy="136" r="9" fill="#64748b"/></g>
+            <g class="limb" id="r-arm-r"><rect x="126" y="90" width="12" height="46" rx="6" fill="url(#metal2)"/><circle cx="132" cy="136" r="9" fill="#64748b"/></g>
+            <!-- торс -->
+            <g id="r-torso">
+              <rect x="70" y="86" width="60" height="70" rx="18" fill="url(#metal)"/>
+              <rect x="82" y="100" width="36" height="30" rx="8" fill="#0f172a"/>
+              <circle class="r-chest" cx="100" cy="115" r="7" fill="#22d3ee"/>
+              <rect x="86" y="140" width="28" height="6" rx="3" fill="#64748b"/>
+            </g>
+            <!-- голова -->
+            <g id="r-head">
+              <line x1="100" y1="30" x2="100" y2="44" stroke="#94a3b8" stroke-width="3"/>
+              <circle class="r-antenna" cx="100" cy="26" r="6" fill="#22d3ee"/>
+              <rect x="72" y="42" width="56" height="48" rx="16" fill="url(#metal)" stroke="#cbd5e1" stroke-width="2"/>
+              <circle class="r-eye" cx="88" cy="66" r="8" fill="#22d3ee"/>
+              <circle class="r-eye" cx="112" cy="66" r="8" fill="#22d3ee"/>
+              <circle cx="88" cy="66" r="3" fill="#ecfeff"/>
+              <circle cx="112" cy="66" r="3" fill="#ecfeff"/>
+              <g stroke="#334155" stroke-width="2.5">
+                <line x1="90" y1="80" x2="90" y2="85"/><line x1="97" y1="80" x2="97" y2="85"/>
+                <line x1="104" y1="80" x2="104" y2="85"/><line x1="110" y1="80" x2="110" y2="85"/>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </div>
       <h2 class="exercise-name" id="ex-name">Разминка</h2>
       <div class="timer-ring">
         <svg viewBox="0 0 120 120">

@@ -152,3 +152,77 @@ body {
 .done-stats div { display: flex; flex-direction: column; }
 .done-stats strong { font-size: 30px; color: var(--accent); }
 .done-stats span { font-size: 12px; color: var(--muted); }
+
+/* --- Кнопка озвучки --- */
+.voice-toggle { position: absolute; top: 14px; right: 14px; background: var(--bg-soft); border: none;
+  color: var(--text); width: 44px; height: 44px; border-radius: 12px; font-size: 20px; cursor: pointer; }
+.voice-toggle.off { opacity: .5; }
+.voice-toggle:active { transform: scale(.92); }
+.app-header { position: relative; }
+
+/* --- Робот-тренер --- */
+.robot-stage { height: 200px; display: flex; align-items: center; justify-content: center; margin: 4px 0; }
+.robot { height: 195px; width: auto; overflow: visible; }
+.r-shadow { fill: rgba(0,0,0,.28); animation: shadowPulse 2.6s ease-in-out infinite; }
+.r-eye, .r-chest, .r-antenna { filter: drop-shadow(0 0 5px #22d3ee); }
+.limb { transform-box: fill-box; transform-origin: 50% 0%; }
+#r-body { transform-box: fill-box; transform-origin: 50% 100%; }
+
+@keyframes shadowPulse { 0%,100% { transform: scaleX(1); opacity: .8; } 50% { transform: scaleX(.86); opacity: .55; } }
+
+/* Покой */
+.anim-idle #r-body { animation: idle 2.6s ease-in-out infinite; }
+@keyframes idle { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+
+/* Приседания */
+.anim-squat #r-body { animation: sqBody 1.5s ease-in-out infinite; }
+@keyframes sqBody { 0%,100% { transform: translateY(0) scaleY(1); } 50% { transform: translateY(22px) scaleY(.9); } }
+.anim-squat #r-arm-l { animation: sqArmL 1.5s ease-in-out infinite; }
+.anim-squat #r-arm-r { animation: sqArmR 1.5s ease-in-out infinite; }
+@keyframes sqArmL { 0%,100% { transform: rotate(0); } 50% { transform: rotate(-75deg); } }
+@keyframes sqArmR { 0%,100% { transform: rotate(0); } 50% { transform: rotate(75deg); } }
+
+/* Отжимания / пуш */
+.anim-pushup #r-body { animation: puBody 1.1s ease-in-out infinite; }
+@keyframes puBody { 0%,100% { transform: translateY(0); } 50% { transform: translateY(13px); } }
+.anim-pushup #r-arm-l { animation: puArmL 1.1s ease-in-out infinite; }
+.anim-pushup #r-arm-r { animation: puArmR 1.1s ease-in-out infinite; }
+@keyframes puArmL { 0%,100% { transform: rotate(-95deg); } 50% { transform: rotate(-60deg); } }
+@keyframes puArmR { 0%,100% { transform: rotate(95deg); } 50% { transform: rotate(60deg); } }
+
+/* Прыжки / джампинг-джек */
+.anim-jump #r-body { animation: hop .6s ease-in-out infinite; }
+@keyframes hop { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-18px); } }
+.anim-jump #r-arm-l { animation: jjArmL .6s ease-in-out infinite; }
+.anim-jump #r-arm-r { animation: jjArmR .6s ease-in-out infinite; }
+@keyframes jjArmL { 0%,100% { transform: rotate(12deg); } 50% { transform: rotate(158deg); } }
+@keyframes jjArmR { 0%,100% { transform: rotate(-12deg); } 50% { transform: rotate(-158deg); } }
+.anim-jump #r-leg-l { animation: jjLegL .6s ease-in-out infinite; }
+.anim-jump #r-leg-r { animation: jjLegR .6s ease-in-out infinite; }
+@keyframes jjLegL { 0%,100% { transform: rotate(0); } 50% { transform: rotate(-20deg); } }
+@keyframes jjLegR { 0%,100% { transform: rotate(0); } 50% { transform: rotate(20deg); } }
+
+/* Пресс (наклоны корпуса) */
+.anim-core #r-body { animation: coreLean 1.4s ease-in-out infinite; }
+@keyframes coreLean { 0%,100% { transform: rotate(0); } 50% { transform: rotate(-18deg); } }
+.anim-core #r-leg-l { animation: coreLegL 1.4s ease-in-out infinite; }
+.anim-core #r-leg-r { animation: coreLegR 1.4s ease-in-out infinite; }
+@keyframes coreLegL { 0%,100% { transform: rotate(0); } 50% { transform: rotate(28deg); } }
+@keyframes coreLegR { 0%,100% { transform: rotate(0); } 50% { transform: rotate(-28deg); } }
+
+/* Планка / супермен (удержание) */
+.anim-hold #r-body { animation: hold .8s ease-in-out infinite; }
+@keyframes hold { 0%,100% { transform: translateY(0) rotate(0); } 25% { transform: translateY(-1.5px) rotate(.8deg); } 75% { transform: translateY(1.5px) rotate(-.8deg); } }
+
+/* Бег / скалолаз (поочерёдно) */
+.anim-run #r-body { animation: hop .5s ease-in-out infinite; }
+.anim-run #r-leg-l { animation: knee .5s ease-in-out infinite; }
+.anim-run #r-leg-r { animation: knee .5s ease-in-out infinite; animation-delay: -.25s; }
+@keyframes knee { 0%,100% { transform: rotate(4deg); } 50% { transform: rotate(-46deg); } }
+.anim-run #r-arm-l { animation: swing .5s ease-in-out infinite; animation-delay: -.25s; }
+.anim-run #r-arm-r { animation: swing .5s ease-in-out infinite; }
+@keyframes swing { 0%,100% { transform: rotate(-18deg); } 50% { transform: rotate(30deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .robot *, .r-shadow { animation: none !important; }
+}

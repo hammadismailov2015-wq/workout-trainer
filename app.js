@@ -3,19 +3,20 @@
    ============================================================ */
 
 // --- Каталог упражнений ---
+// anim — как робот-тренер показывает упражнение (класс анимации)
 const EXERCISES = {
-  squats:    { name: "Приседания",     ico: "🦵", cal: 8 },
-  pushups:   { name: "Отжимания",      ico: "💪", cal: 8 },
-  abs:       { name: "Пресс",          ico: "🔥", cal: 7 },
-  plank:     { name: "Планка",         ico: "🧘", cal: 5 },
-  lunges:    { name: "Выпады",         ico: "🚶", cal: 8 },
-  burpee:    { name: "Бёрпи",          ico: "⚡", cal: 12 },
-  jumpjack:  { name: "Джампинг-джек",  ico: "🤸", cal: 10 },
-  mountain:  { name: "Скалолаз",       ico: "⛰️", cal: 10 },
-  legraise:  { name: "Подъём ног",     ico: "🦿", cal: 6 },
-  highknees: { name: "Бег с колен.",   ico: "🏃", cal: 11 },
-  superman:  { name: "Супермен",       ico: "🦸", cal: 5 },
-  wallsit:   { name: "Стульчик",       ico: "🪑", cal: 6 },
+  squats:    { name: "Приседания",     ico: "🦵", cal: 8,  anim: "squat" },
+  pushups:   { name: "Отжимания",      ico: "💪", cal: 8,  anim: "pushup" },
+  abs:       { name: "Пресс",          ico: "🔥", cal: 7,  anim: "core" },
+  plank:     { name: "Планка",         ico: "🧘", cal: 5,  anim: "hold" },
+  lunges:    { name: "Выпады",         ico: "🚶", cal: 8,  anim: "squat" },
+  burpee:    { name: "Бёрпи",          ico: "⚡", cal: 12, anim: "jump" },
+  jumpjack:  { name: "Джампинг-джек",  ico: "🤸", cal: 10, anim: "jump" },
+  mountain:  { name: "Скалолаз",       ico: "⛰️", cal: 10, anim: "run" },
+  legraise:  { name: "Подъём ног",     ico: "🦿", cal: 6,  anim: "core" },
+  highknees: { name: "Бег с колен.",   ico: "🏃", cal: 11, anim: "run" },
+  superman:  { name: "Супермен",       ico: "🦸", cal: 5,  anim: "hold" },
+  wallsit:   { name: "Стульчик",       ico: "🪑", cal: 6,  anim: "squat" },
 };
 
 // --- Готовые программы ---
@@ -192,33 +193,35 @@ function enterStep() {
   const step = W.seq[W.idx];
   W.remaining = step.dur;
 
-  const body = document.getElementById("workout-body");
+  const body  = document.getElementById("workout-body");
   body.classList.remove("rest", "prep");
 
   const phase = document.getElementById("phase-label");
-  const emoji = document.getElementById("ex-emoji");
   const name  = document.getElementById("ex-name");
   const next  = document.getElementById("next-up");
 
   if (step.type === "prep") {
     body.classList.add("prep");
+    setRobotAnim("idle");
     phase.textContent = "Приготовься";
-    emoji.textContent = "🕐";
     name.textContent = "Начинаем!";
     next.textContent = "Первое: " + EXERCISES[W.seq[1].key].name;
+    say("Приготовься! Начинаем через несколько секунд.");
   } else if (step.type === "rest") {
     body.classList.add("rest");
+    setRobotAnim("idle");
     phase.textContent = "Отдых";
-    emoji.textContent = "😮‍💨";
     name.textContent = "Передохни";
     const nx = findNextWork(W.idx);
     next.textContent = nx ? "Далее: " + EXERCISES[nx.key].name : "";
+    say(nx ? "Отдохни. Дальше — " + EXERCISES[nx.key].name : "Отдохни.");
   } else { // work
+    setRobotAnim(EXERCISES[step.key].anim);
     phase.textContent = "Работай!";
-    emoji.textContent = EXERCISES[step.key].ico;
     name.textContent = EXERCISES[step.key].name;
     const nx = findNextWork(W.idx);
     next.textContent = nx ? "Далее: " + EXERCISES[nx.key].name : "Последнее упражнение 💪";
+    say("Смотри на картинку и повторяй за мной. " + EXERCISES[step.key].name + "!");
   }
 
   // Круг
@@ -228,6 +231,12 @@ function enterStep() {
   beep(step.type === "work" ? "go" : "soft");
   updateTimerUI();
   updateProgress();
+}
+
+// Переключить анимацию робота-тренера
+function setRobotAnim(anim) {
+  const robot = document.getElementById("robot");
+  if (robot) robot.setAttribute("class", "robot anim-" + anim);
 }
 
 function findNextWork(i) {
@@ -282,6 +291,7 @@ function finishWorkout() {
   const cals = Math.round(W.curCal);
   recordWorkout(secs, exCount, cals);
   beep("done");
+  say("Тренировка завершена! Отличная работа!");
 
   document.getElementById("done-time").textContent = fmtTime(secs);
   document.getElementById("done-ex").textContent = exCount;
@@ -301,12 +311,14 @@ function fmtTime(s) {
 document.getElementById("btn-pause").addEventListener("click", () => {
   W.paused = !W.paused;
   document.getElementById("btn-pause").textContent = W.paused ? "▶" : "⏸";
+  if (W.paused) { stopSpeech(); say("Пауза"); }
 });
 document.getElementById("btn-next").addEventListener("click", () => nextStep());
 document.getElementById("btn-prev").addEventListener("click", () => prevStep());
 document.getElementById("btn-quit").addEventListener("click", () => {
   if (confirm("Завершить тренировку?")) {
     clearInterval(W.timer);
+    stopSpeech();
     document.getElementById("screen-workout").classList.remove("active");
     goto("home");
   }
@@ -332,6 +344,65 @@ function beep(kind) {
     o.start(now);
     o.stop(now + (kind === "done" ? 0.5 : 0.16));
   } catch (e) { /* звук не критичен */ }
+}
+
+// ============================================================
+//  Голос тренера (Web Speech API — синтез речи)
+// ============================================================
+let voiceOn = localStorage.getItem("gym_voice") !== "off";
+let ruVoice = null;
+
+function pickVoice() {
+  if (!("speechSynthesis" in window)) return;
+  const voices = speechSynthesis.getVoices();
+  // Предпочитаем русский голос
+  ruVoice = voices.find(v => /ru[-_]/i.test(v.lang)) ||
+            voices.find(v => /russian|русск/i.test(v.name)) || null;
+}
+if ("speechSynthesis" in window) {
+  pickVoice();
+  speechSynthesis.onvoiceschanged = pickVoice;
+}
+
+function say(text) {
+  if (!voiceOn || !("speechSynthesis" in window)) return;
+  try {
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = "ru-RU";
+    if (ruVoice) u.voice = ruVoice;
+    u.rate = 1.0;
+    u.pitch = 0.85;   // чуть ниже — «роботный» тембр
+    u.volume = 1.0;
+    speechSynthesis.speak(u);
+  } catch (e) { /* озвучка не критична */ }
+}
+
+function stopSpeech() {
+  if ("speechSynthesis" in window) { try { speechSynthesis.cancel(); } catch (e) {} }
+}
+
+// Переключатель голоса
+const voiceBtn = document.getElementById("voice-toggle");
+function updateVoiceBtn() {
+  voiceBtn.textContent = voiceOn ? "🔊" : "🔇";
+  voiceBtn.classList.toggle("off", !voiceOn);
+}
+voiceBtn.addEventListener("click", () => {
+  voiceOn = !voiceOn;
+  localStorage.setItem("gym_voice", voiceOn ? "on" : "off");
+  updateVoiceBtn();
+  if (voiceOn) say("Голос тренера включён"); else stopSpeech();
+});
+updateVoiceBtn();
+
+// ============================================================
+//  PWA — установка на телефон и офлайн-режим
+// ============================================================
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("sw.js").catch(() => {});
+  });
 }
 
 // ============================================================
