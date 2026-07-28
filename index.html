@@ -103,33 +103,69 @@
               <stop offset="1" stop-color="#334155"/>
             </linearGradient>
           </defs>
-          <ellipse class="r-shadow" id="r-shadow" cx="100" cy="238" rx="52" ry="8"/>
+          <ellipse class="r-shadow" id="r-shadow" cx="100" cy="240" rx="56" ry="8"/>
           <g id="r-body">
-            <!-- ноги -->
-            <g class="limb" id="r-leg-l"><rect x="83" y="150" width="14" height="50" rx="7" fill="url(#metal2)"/><rect x="79" y="195" width="22" height="11" rx="5" fill="#1e293b"/></g>
-            <g class="limb" id="r-leg-r"><rect x="103" y="150" width="14" height="50" rx="7" fill="url(#metal2)"/><rect x="99" y="195" width="22" height="11" rx="5" fill="#1e293b"/></g>
-            <!-- руки -->
-            <g class="limb" id="r-arm-l"><rect x="62" y="90" width="12" height="46" rx="6" fill="url(#metal2)"/><circle cx="68" cy="136" r="9" fill="#64748b"/></g>
-            <g class="limb" id="r-arm-r"><rect x="126" y="90" width="12" height="46" rx="6" fill="url(#metal2)"/><circle cx="132" cy="136" r="9" fill="#64748b"/></g>
-            <!-- торс -->
-            <g id="r-torso">
-              <rect x="70" y="86" width="60" height="70" rx="18" fill="url(#metal)"/>
-              <rect x="82" y="100" width="36" height="30" rx="8" fill="#0f172a"/>
-              <circle class="r-chest" cx="100" cy="115" r="7" fill="#22d3ee"/>
-              <rect x="86" y="140" width="28" height="6" rx="3" fill="#64748b"/>
+            <!-- НОГИ (бедро + голень + стопа) -->
+            <g class="limb" id="r-leg-l">
+              <rect x="73" y="156" width="22" height="34" rx="9" fill="url(#metal)"/>
+              <circle cx="84" cy="188" r="7" fill="#334155"/>
+              <rect x="75" y="184" width="18" height="32" rx="8" fill="url(#metal2)"/>
+              <rect x="68" y="212" width="31" height="14" rx="6" fill="#1e293b"/>
             </g>
-            <!-- голова -->
+            <g class="limb" id="r-leg-r">
+              <rect x="105" y="156" width="22" height="34" rx="9" fill="url(#metal)"/>
+              <circle cx="116" cy="188" r="7" fill="#334155"/>
+              <rect x="107" y="184" width="18" height="32" rx="8" fill="url(#metal2)"/>
+              <rect x="101" y="212" width="31" height="14" rx="6" fill="#1e293b"/>
+            </g>
+            <!-- РУКИ (плечо + предплечье + кулак) -->
+            <g class="limb" id="r-arm-l">
+              <rect x="49" y="100" width="20" height="30" rx="9" fill="url(#metal)"/>
+              <circle cx="59" cy="129" r="6" fill="#334155"/>
+              <rect x="50" y="126" width="18" height="30" rx="8" fill="url(#metal2)"/>
+              <rect x="49" y="152" width="20" height="15" rx="6" fill="#475569"/>
+            </g>
+            <g class="limb" id="r-arm-r">
+              <rect x="131" y="100" width="20" height="30" rx="9" fill="url(#metal)"/>
+              <circle cx="141" cy="129" r="6" fill="#334155"/>
+              <rect x="132" y="126" width="18" height="30" rx="8" fill="url(#metal2)"/>
+              <rect x="131" y="152" width="20" height="15" rx="6" fill="#475569"/>
+            </g>
+            <!-- ТОРС (накачанный корпус) -->
+            <g id="r-torso">
+              <!-- корпус -->
+              <path d="M66,102 Q64,96 72,95 L128,95 Q136,96 134,102 L130,140 Q128,160 116,161 L84,161 Q72,160 70,140 Z"
+                    fill="url(#metal)" stroke="#cbd5e1" stroke-width="1.5"/>
+              <!-- наплечники -->
+              <ellipse cx="60" cy="103" rx="16" ry="13" fill="url(#metal2)" stroke="#cbd5e1" stroke-width="1.5"/>
+              <ellipse cx="140" cy="103" rx="16" ry="13" fill="url(#metal2)" stroke="#cbd5e1" stroke-width="1.5"/>
+              <!-- грудные пластины -->
+              <path d="M84,108 Q98,104 99,118 Q98,126 86,126 Q80,122 80,114 Z" fill="#64748b" opacity=".55"/>
+              <path d="M116,108 Q102,104 101,118 Q102,126 114,126 Q120,122 120,114 Z" fill="#64748b" opacity=".55"/>
+              <!-- ядро (светящееся) -->
+              <circle class="r-chest" cx="100" cy="132" r="8" fill="#22d3ee"/>
+              <circle cx="100" cy="132" r="3.5" fill="#ecfeff"/>
+              <!-- пресс -->
+              <g stroke="#334155" stroke-width="2" opacity=".7">
+                <line x1="88" y1="144" x2="112" y2="144"/>
+                <line x1="90" y1="152" x2="110" y2="152"/>
+                <line x1="100" y1="140" x2="100" y2="157"/>
+              </g>
+            </g>
+            <!-- ГОЛОВА -->
             <g id="r-head">
-              <line x1="100" y1="30" x2="100" y2="44" stroke="#94a3b8" stroke-width="3"/>
-              <circle class="r-antenna" cx="100" cy="26" r="6" fill="#22d3ee"/>
-              <rect x="72" y="42" width="56" height="48" rx="16" fill="url(#metal)" stroke="#cbd5e1" stroke-width="2"/>
-              <circle class="r-eye" cx="88" cy="66" r="8" fill="#22d3ee"/>
-              <circle class="r-eye" cx="112" cy="66" r="8" fill="#22d3ee"/>
-              <circle cx="88" cy="66" r="3" fill="#ecfeff"/>
-              <circle cx="112" cy="66" r="3" fill="#ecfeff"/>
-              <g stroke="#334155" stroke-width="2.5">
-                <line x1="90" y1="80" x2="90" y2="85"/><line x1="97" y1="80" x2="97" y2="85"/>
-                <line x1="104" y1="80" x2="104" y2="85"/><line x1="110" y1="80" x2="110" y2="85"/>
+              <line x1="100" y1="28" x2="100" y2="44" stroke="#94a3b8" stroke-width="3"/>
+              <circle class="r-antenna" cx="100" cy="24" r="6" fill="#22d3ee"/>
+              <rect x="72" y="90" width="56" height="8" rx="4" fill="#475569"/> <!-- шея/воротник -->
+              <rect x="74" y="44" width="52" height="48" rx="16" fill="url(#metal)" stroke="#cbd5e1" stroke-width="2"/>
+              <rect x="80" y="58" width="40" height="22" rx="11" fill="#0f172a"/> <!-- визор -->
+              <circle class="r-eye" cx="89" cy="69" r="7" fill="#22d3ee"/>
+              <circle class="r-eye" cx="111" cy="69" r="7" fill="#22d3ee"/>
+              <circle cx="89" cy="69" r="2.6" fill="#ecfeff"/>
+              <circle cx="111" cy="69" r="2.6" fill="#ecfeff"/>
+              <g stroke="#334155" stroke-width="2.4">
+                <line x1="92" y1="84" x2="92" y2="88"/><line x1="98" y1="84" x2="98" y2="88"/>
+                <line x1="104" y1="84" x2="104" y2="88"/><line x1="110" y1="84" x2="110" y2="88"/>
               </g>
             </g>
           </g>
