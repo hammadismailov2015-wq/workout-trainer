@@ -191,7 +191,6 @@ function startWorkout(prog) {
     curCal: 0,
     timer: null,
   };
-  warmTTS();   // разблокировать голос внутри жеста «Начать»
   goto("workout");
   document.getElementById("screen-workout").classList.add("active");
   enterStep();
@@ -215,7 +214,7 @@ function enterStep() {
     phase.textContent = "Приготовься";
     name.textContent = "Начинаем!";
     next.textContent = "Первое: " + EXERCISES[W.seq[1].key].name;
-    say("Приготовься! Начинаем через несколько секунд.");
+    playClip("ready");
   } else if (step.type === "rest") {
     body.classList.add("rest");
     setRobotAnim("idle");
@@ -223,14 +222,14 @@ function enterStep() {
     name.textContent = "Передохни";
     const nx = findNextWork(W.idx);
     next.textContent = nx ? "Далее: " + EXERCISES[nx.key].name : "";
-    say(nx ? "Отдохни. Дальше — " + EXERCISES[nx.key].name : "Отдохни.");
+    playClip("rest");
   } else { // work
     setRobotAnim(EXERCISES[step.key].anim);
     phase.textContent = "Работай!";
     name.textContent = EXERCISES[step.key].name;
     const nx = findNextWork(W.idx);
     next.textContent = nx ? "Далее: " + EXERCISES[nx.key].name : "Последнее упражнение 💪";
-    say("Смотри на картинку и повторяй за мной. " + EXERCISES[step.key].name + "!");
+    playClip("work_" + step.key);
   }
 
   // Круг
@@ -324,7 +323,7 @@ function finishWorkout() {
   const cals = Math.round(W.curCal);
   recordWorkout(secs, exCount, cals);
   beep("done");
-  say("Тренировка завершена! Отличная работа!");
+  playClip("done");
 
   document.getElementById("done-time").textContent = fmtTime(secs);
   document.getElementById("done-ex").textContent = exCount;
@@ -344,14 +343,14 @@ function fmtTime(s) {
 document.getElementById("btn-pause").addEventListener("click", () => {
   W.paused = !W.paused;
   document.getElementById("btn-pause").textContent = W.paused ? "▶" : "⏸";
-  if (W.paused) { stopSpeech(); say("Пауза"); }
+  if (W.paused) { playClip("pause"); }
 });
 document.getElementById("btn-next").addEventListener("click", () => nextStep());
 document.getElementById("btn-prev").addEventListener("click", () => prevStep());
 document.getElementById("btn-quit").addEventListener("click", () => {
   if (confirm("Завершить тренировку?")) {
     clearInterval(W.timer);
-    stopSpeech();
+    stopClip();
     document.getElementById("screen-workout").classList.remove("active");
     goto("home");
   }
@@ -380,85 +379,33 @@ function beep(kind) {
 }
 
 // ============================================================
-//  Голос тренера (Web Speech API — синтез речи)
+//  Голос тренера — встроенные аудиофайлы (работают на любом телефоне)
 // ============================================================
 let voiceOn = localStorage.getItem("gym_voice") !== "off";
-let voices = [];
-let ruVoice = null;
-let ttsWarmed = false;
+let audioEl = null;
 
-function pickVoice() {
-  if (!("speechSynthesis" in window)) return;
-  voices = speechSynthesis.getVoices() || [];
-  // Предпочитаем русский голос; если нет — движок телефона озвучит своим по умолчанию
-  ruVoice = voices.find(v => /(^|[^a-z])ru([-_]|$)/i.test(v.lang)) ||
-            voices.find(v => /russian|русск/i.test(v.name)) || null;
-}
-if ("speechSynthesis" in window) {
-  pickVoice();
-  speechSynthesis.addEventListener("voiceschanged", pickVoice);
+function getAudio() {
+  if (!audioEl) {
+    audioEl = new Audio();
+    audioEl.preload = "auto";
+  }
+  return audioEl;
 }
 
-// Разбудить движок и подгрузить голоса (без произнесения — чтобы не конфликтовать с speak)
-function warmTTS() {
-  if (!("speechSynthesis" in window)) return;
-  ttsWarmed = true;
-  try { speechSynthesis.getVoices(); speechSynthesis.resume(); } catch (e) {}
-}
-
-function buildUtterance(text) {
-  pickVoice();
-  const u = new SpeechSynthesisUtterance(text);
-  u.lang = "ru-RU";
-  if (ruVoice) u.voice = ruVoice;
-  u.rate = 1.0;
-  u.pitch = 0.9;
-  u.volume = 1.0;
-  return u;
-}
-
-function say(text) {
-  if (!voiceOn || !("speechSynthesis" in window)) return;
+function playClip(name) {
+  if (!voiceOn) return;
   try {
-    const doSpeak = () => {
-      try {
-        speechSynthesis.speak(buildUtterance(text));
-        setTimeout(() => { try { speechSynthesis.resume(); } catch (e) {} }, 120);
-      } catch (e) {}
-    };
-    if (speechSynthesis.speaking || speechSynthesis.pending) {
-      speechSynthesis.cancel();
-      setTimeout(doSpeak, 70);   // обход бага Android: пауза после cancel
-    } else {
-      doSpeak();                 // синхронно — сохраняем «жест» пользователя
-    }
-  } catch (e) { /* озвучка не критична */ }
+    const a = getAudio();
+    a.muted = false;
+    a.src = "audio/" + name + ".mp3";
+    a.currentTime = 0;
+    const pr = a.play();
+    if (pr && pr.catch) pr.catch(() => {});
+  } catch (e) {}
 }
 
-// Тест голоса с диагностикой (вызывается по нажатию 🔊)
-function testVoice() {
-  if (!("speechSynthesis" in window)) { alert("Этот браузер не поддерживает голос. Открой в Chrome."); return; }
-  try {
-    speechSynthesis.cancel();
-    let started = false, errCode = "";
-    const u = buildUtterance("Голос тренера включён");
-    u.onstart = () => { started = true; };
-    u.onerror = (e) => { errCode = (e && e.error) ? e.error : "error"; };
-    speechSynthesis.speak(u);
-    setTimeout(() => { try { speechSynthesis.resume(); } catch (e) {} }, 120);
-    setTimeout(() => {
-      if (!started) {
-        const n = (speechSynthesis.getVoices() || []).length;
-        alert("🔇 Голос не запустился.\n\nГолосов видно: " + n +
-              (errCode ? "\nОшибка: " + errCode : "") +
-              "\n\nПопробуй: прибавь громкость мультимедиа; в настройках синтеза речи выбери Google; закрой и открой Chrome заново.");
-      }
-    }, 1700);
-  } catch (e) { alert("Ошибка голоса: " + e.message); }
-}
-
-function stopSpeech() {
-  if ("speechSynthesis" in window) { try { speechSynthesis.cancel(); } catch (e) {} }
+function stopClip() {
+  try { if (audioEl) { audioEl.pause(); audioEl.currentTime = 0; } } catch (e) {}
 }
 
 // Переключатель голоса
@@ -471,12 +418,7 @@ voiceBtn.addEventListener("click", () => {
   voiceOn = !voiceOn;
   localStorage.setItem("gym_voice", voiceOn ? "on" : "off");
   updateVoiceBtn();
-  if (voiceOn) {
-    warmTTS();
-    testVoice();   // произносит фразу и, если не вышло, показывает диагностику
-  } else {
-    stopSpeech();
-  }
+  if (voiceOn) playClip("voiceon"); else stopClip();
 });
 updateVoiceBtn();
 

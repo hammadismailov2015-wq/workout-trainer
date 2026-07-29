@@ -1,6 +1,10 @@
 // Service worker — сеть в приоритете, кэш только как офлайн-резерв.
 // (Раньше был «сначала кэш» — из-за него не подтягивались обновления.)
-const CACHE = "trainer-v4";
+const CACHE = "trainer-v5";
+const CLIPS = ["ready","rest","done","pause","voiceon",
+  "work_squats","work_pushups","work_abs","work_plank","work_lunges","work_burpee",
+  "work_jumpjack","work_mountain","work_legraise","work_highknees","work_superman",
+  "work_wallsit","work_treadmill","work_pullups","work_bike","work_dumbbell","work_jumprope"];
 const ASSETS = [
   "./",
   "./index.html",
@@ -9,7 +13,7 @@ const ASSETS = [
   "./manifest.json",
   "./icon-192.png",
   "./icon-512.png",
-];
+].concat(CLIPS.map((c) => "./audio/" + c + ".mp3"));
 
 self.addEventListener("install", (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(ASSETS)).then(() => self.skipWaiting()));
