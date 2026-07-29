@@ -330,6 +330,39 @@
             <circle cx="45" cy="191" r="2.2" fill="#ecfeff"/>
           </g>
         </svg>
+        <!-- Подъём ног: лёжа на спине, прямые ноги поднимаются вверх и опускаются -->
+        <svg class="robot-side" id="robot-legraise" viewBox="0 0 200 250" aria-hidden="true">
+          <defs>
+            <linearGradient id="lmetal" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#f1f5f9"/><stop offset=".5" stop-color="#94a3b8"/><stop offset="1" stop-color="#475569"/>
+            </linearGradient>
+            <linearGradient id="lmetal2" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#cbd5e1"/><stop offset="1" stop-color="#334155"/>
+            </linearGradient>
+          </defs>
+          <line x1="22" y1="208" x2="178" y2="208" stroke="#334155" stroke-width="4" stroke-linecap="round"/>
+          <!-- голова на полу (слева) -->
+          <line x1="52" y1="192" x2="44" y2="184" stroke="#94a3b8" stroke-width="3"/>
+          <circle class="r-antenna" cx="42" cy="181" r="5" fill="#22d3ee"/>
+          <rect x="32" y="186" width="30" height="24" rx="12" fill="url(#lmetal)" stroke="#cbd5e1" stroke-width="1.5"/>
+          <circle class="r-eye" cx="45" cy="194" r="6" fill="#22d3ee"/>
+          <circle cx="44" cy="193" r="2.2" fill="#ecfeff"/>
+          <!-- рука вдоль пола -->
+          <rect x="72" y="200" width="34" height="9" rx="4" fill="url(#lmetal2)"/>
+          <!-- корпус на полу (спина внизу, живот сверху) -->
+          <rect x="54" y="188" width="68" height="18" rx="9" fill="url(#lmetal)" stroke="#cbd5e1" stroke-width="1.5"/>
+          <g stroke="#334155" stroke-width="2" opacity=".65">  <!-- пресс сверху -->
+            <line x1="72" y1="188" x2="72" y2="197"/><line x1="84" y1="188" x2="84" y2="197"/>
+            <line x1="96" y1="188" x2="96" y2="197"/><line x1="108" y1="188" x2="108" y2="197"/>
+          </g>
+          <!-- прямые ноги, поднимаются от бедра -->
+          <g id="lr-legs">
+            <rect x="120" y="184" width="76" height="13" rx="6" fill="url(#lmetal2)"/>            <!-- дальняя нога -->
+            <rect x="120" y="192" width="72" height="15" rx="7" fill="url(#lmetal)"/>              <!-- ближняя нога -->
+            <circle cx="158" cy="199" r="6" fill="#334155"/>                                       <!-- колено -->
+            <rect x="188" y="188" width="12" height="20" rx="4" fill="#1e293b"/>                    <!-- стопа -->
+          </g>
+        </svg>
       </div>
       <h2 class="exercise-name" id="ex-name">Разминка</h2>
       <div class="timer-ring">

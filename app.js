@@ -13,7 +13,7 @@ const EXERCISES = {
   burpee:    { name: "Бёрпи",          ico: "⚡", cal: 12, anim: "jump" },
   jumpjack:  { name: "Джампинг-джек",  ico: "🤸", cal: 10, anim: "jump" },
   mountain:  { name: "Скалолаз",       ico: "⛰️", cal: 10, anim: "mountain" },
-  legraise:  { name: "Подъём ног",     ico: "🦿", cal: 6,  anim: "core" },
+  legraise:  { name: "Подъём ног",     ico: "🦿", cal: 6,  anim: "legraise" },
   highknees: { name: "Бег с колен.",   ico: "🏃", cal: 11, anim: "run" },
   superman:  { name: "Супермен",       ico: "🦸", cal: 5,  anim: "superman" },
   wallsit:   { name: "Стульчик",       ico: "🪑", cal: 6,  anim: "squat" },
@@ -242,11 +242,12 @@ const SIDE_MODES = {
   superman: "superman-mode",
   squatside: "squat-mode",
   crunch: "crunch-mode",
+  legraise: "legraise-mode",
 };
 function setRobotAnim(anim) {
   const robot = document.getElementById("robot");
   const stage = document.getElementById("robot-stage");
-  stage.classList.remove("pushup-mode", "plank-mode", "mountain-mode", "superman-mode", "squat-mode", "crunch-mode");
+  stage.classList.remove("pushup-mode", "plank-mode", "mountain-mode", "superman-mode", "squat-mode", "crunch-mode", "legraise-mode");
   if (SIDE_MODES[anim]) {
     stage.classList.add(SIDE_MODES[anim]);     // профильный робот
   } else if (robot) {
