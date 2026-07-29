@@ -406,25 +406,55 @@ function warmTTS() {
   try { speechSynthesis.getVoices(); speechSynthesis.resume(); } catch (e) {}
 }
 
+function buildUtterance(text) {
+  pickVoice();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = "ru-RU";
+  if (ruVoice) u.voice = ruVoice;
+  u.rate = 1.0;
+  u.pitch = 0.9;
+  u.volume = 1.0;
+  return u;
+}
+
 function say(text) {
   if (!voiceOn || !("speechSynthesis" in window)) return;
   try {
-    speechSynthesis.cancel();
-    // Пауза после cancel — обход бага Chrome/Android, когда речь «проглатывается»
-    setTimeout(() => {
+    const doSpeak = () => {
       try {
-        pickVoice();
-        const u = new SpeechSynthesisUtterance(text);
-        u.lang = "ru-RU";
-        if (ruVoice) u.voice = ruVoice;
-        u.rate = 1.0;
-        u.pitch = 0.9;
-        u.volume = 1.0;
-        speechSynthesis.speak(u);
+        speechSynthesis.speak(buildUtterance(text));
         setTimeout(() => { try { speechSynthesis.resume(); } catch (e) {} }, 120);
       } catch (e) {}
-    }, 70);
+    };
+    if (speechSynthesis.speaking || speechSynthesis.pending) {
+      speechSynthesis.cancel();
+      setTimeout(doSpeak, 70);   // обход бага Android: пауза после cancel
+    } else {
+      doSpeak();                 // синхронно — сохраняем «жест» пользователя
+    }
   } catch (e) { /* озвучка не критична */ }
+}
+
+// Тест голоса с диагностикой (вызывается по нажатию 🔊)
+function testVoice() {
+  if (!("speechSynthesis" in window)) { alert("Этот браузер не поддерживает голос. Открой в Chrome."); return; }
+  try {
+    speechSynthesis.cancel();
+    let started = false, errCode = "";
+    const u = buildUtterance("Голос тренера включён");
+    u.onstart = () => { started = true; };
+    u.onerror = (e) => { errCode = (e && e.error) ? e.error : "error"; };
+    speechSynthesis.speak(u);
+    setTimeout(() => { try { speechSynthesis.resume(); } catch (e) {} }, 120);
+    setTimeout(() => {
+      if (!started) {
+        const n = (speechSynthesis.getVoices() || []).length;
+        alert("🔇 Голос не запустился.\n\nГолосов видно: " + n +
+              (errCode ? "\nОшибка: " + errCode : "") +
+              "\n\nПопробуй: прибавь громкость мультимедиа; в настройках синтеза речи выбери Google; закрой и открой Chrome заново.");
+      }
+    }, 1700);
+  } catch (e) { alert("Ошибка голоса: " + e.message); }
 }
 
 function stopSpeech() {
@@ -443,11 +473,7 @@ voiceBtn.addEventListener("click", () => {
   updateVoiceBtn();
   if (voiceOn) {
     warmTTS();
-    say("Голос тренера включён");
-    // Подсказка только если браузер вообще не умеет синтез речи
-    if (!("speechSynthesis" in window)) {
-      alert("Этот браузер не поддерживает голос. Открой приложение в Chrome.");
-    }
+    testVoice();   // произносит фразу и, если не вышло, показывает диагностику
   } else {
     stopSpeech();
   }
