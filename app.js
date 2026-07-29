@@ -23,6 +23,9 @@ const EXERCISES = {
   bike:      { name: "Велотренажёр",    ico: "🚴", cal: 10, anim: "bike" },
   dumbbell:  { name: "Гантели",         ico: "🏋️", cal: 7,  anim: "dumbbell" },
   jumprope:  { name: "Скакалка",        ico: "🪢", cal: 12, anim: "jumprope" },
+  kettlebell:{ name: "Гиря",            ico: "🔔", cal: 10, anim: "kettlebell" },
+  barbell:   { name: "Жим штанги",      ico: "🏋️‍♂️", cal: 8, anim: "barbell" },
+  rowing:    { name: "Гребной тренажёр", ico: "🚣", cal: 11, anim: "rowing" },
 };
 
 // --- Готовые программы ---
@@ -40,7 +43,7 @@ const PROGRAMS = [
   { id: "quick",   emoji: "⏱️", name: "Быстрая 5 мин",  meta: "5 мин · разминка",
     work: 30, rest: 10, rounds: 1, ex: ["jumpjack","squats","pushups","abs","plank","lunges"] },
   { id: "gym",     emoji: "🏋️", name: "На тренировке",  meta: "тренажёры · 12 мин",
-    work: 45, rest: 20, rounds: 2, ex: ["treadmill","pullups","bike","dumbbell","jumprope"] },
+    work: 45, rest: 15, rounds: 1, ex: ["treadmill","pullups","bike","rowing","kettlebell","barbell","dumbbell","jumprope"] },
 ];
 
 const PREP_TIME = 10; // подготовка перед стартом
@@ -85,7 +88,7 @@ function goto(id) {
   document.querySelectorAll(".screen").forEach(el => el.classList.remove("active"));
   document.getElementById("screen-" + id).classList.add("active");
   window.scrollTo(0, 0);
-  if (id === "home") loadStats();
+  if (id === "home") { loadStats(); renderMyWorkouts(); }
 }
 
 document.querySelectorAll("[data-goto]").forEach(el =>
@@ -142,6 +145,7 @@ function toggleExercise(key, chip) {
   });
   document.getElementById("builder-count").textContent = "Выбрано: " + selected.length;
   document.getElementById("btn-start-custom").disabled = selected.length === 0;
+  document.getElementById("btn-save-custom").disabled = selected.length === 0;
 }
 
 document.getElementById("btn-custom").addEventListener("click", () => {
@@ -149,8 +153,63 @@ document.getElementById("btn-custom").addEventListener("click", () => {
   renderBuilder();
   document.getElementById("builder-count").textContent = "Выбрано: 0";
   document.getElementById("btn-start-custom").disabled = true;
+  document.getElementById("btn-save-custom").disabled = true;
   goto("builder");
 });
+
+// --- Мои тренировки (сохранённые свои) ---
+function getCustoms() {
+  try { return JSON.parse(localStorage.getItem("gym_custom")) || []; } catch { return []; }
+}
+function saveCustoms(list) { localStorage.setItem("gym_custom", JSON.stringify(list)); }
+
+function currentBuilderProg(name) {
+  return {
+    name: name,
+    work: clamp(+document.getElementById("set-work").value, 5, 300),
+    rest: clamp(+document.getElementById("set-rest").value, 0, 300),
+    rounds: clamp(+document.getElementById("set-rounds").value, 1, 10),
+    ex: [...selected],
+  };
+}
+
+document.getElementById("btn-save-custom").addEventListener("click", () => {
+  if (!selected.length) return;
+  const name = (prompt("Название тренировки:", "Моя тренировка") || "").trim();
+  if (!name) return;
+  const list = getCustoms();
+  list.push(currentBuilderProg(name));
+  saveCustoms(list);
+  goto("home");
+});
+
+function renderMyWorkouts() {
+  const list = getCustoms();
+  const wrap = document.getElementById("my-list");
+  const title = document.getElementById("my-title");
+  wrap.innerHTML = "";
+  title.hidden = list.length === 0;
+  list.forEach((p, idx) => {
+    const mins = Math.max(1, Math.round((p.ex.length * (p.work + p.rest) * p.rounds) / 60));
+    const card = document.createElement("div");
+    card.className = "program-card mine";
+    card.innerHTML = `
+      <span class="program-emoji">🏅</span>
+      <span class="program-name">${p.name}</span>
+      <span class="program-meta">${p.ex.length} упр. · ${p.rounds} кр. · ~${mins} мин</span>
+      <button class="del-btn" title="Удалить">🗑</button>`;
+    card.querySelector(".program-name").addEventListener("click", () => startWorkout(p));
+    card.querySelector(".program-emoji").addEventListener("click", () => startWorkout(p));
+    card.querySelector(".program-meta").addEventListener("click", () => startWorkout(p));
+    card.querySelector(".del-btn").addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (confirm("Удалить «" + p.name + "»?")) {
+        const l = getCustoms(); l.splice(idx, 1); saveCustoms(l); renderMyWorkouts();
+      }
+    });
+    wrap.appendChild(card);
+  });
+}
 
 document.getElementById("btn-start-custom").addEventListener("click", () => {
   const work   = clamp(+document.getElementById("set-work").value, 5, 300);
@@ -258,6 +317,9 @@ const SIDE_MODES = {
   bike: "bike-mode",
   dumbbell: "dumbbell-mode",
   jumprope: "jumprope-mode",
+  kettlebell: "kettlebell-mode",
+  barbell: "barbell-mode",
+  rowing: "rowing-mode",
 };
 const ALL_MODES = Object.values(SIDE_MODES);
 function setRobotAnim(anim) {
@@ -492,3 +554,4 @@ if ("serviceWorker" in navigator) {
 // ============================================================
 renderPrograms();
 loadStats();
+renderMyWorkouts();

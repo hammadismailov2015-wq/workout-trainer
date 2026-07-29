@@ -44,6 +44,9 @@
     <h2 class="section-title">Готовые программы</h2>
     <div class="program-list" id="program-list"></div>
 
+    <h2 class="section-title" id="my-title" hidden>💾 Мои тренировки</h2>
+    <div class="program-list" id="my-list"></div>
+
     <h2 class="section-title">Свободная тренировка</h2>
     <div class="program-list">
       <button class="program-card custom" id="btn-custom">
@@ -114,7 +117,10 @@
     <div class="exercise-grid" id="exercise-grid"></div>
     <div class="builder-footer">
       <span id="builder-count">Выбрано: 0</span>
-      <button class="btn-primary" id="btn-start-custom" disabled>Начать</button>
+      <div class="builder-actions">
+        <button class="btn-secondary" id="btn-save-custom" disabled>💾 Сохранить</button>
+        <button class="btn-primary" id="btn-start-custom" disabled>Начать</button>
+      </div>
     </div>
   </section>
 
@@ -628,6 +634,98 @@
             <rect x="84" y="76" width="32" height="32" rx="14" fill="url(#jmetal)" stroke="#cbd5e1" stroke-width="1.5"/>
             <circle class="r-eye" cx="92" cy="90" r="6.5" fill="#22d3ee"/><circle class="r-eye" cx="108" cy="90" r="6.5" fill="#22d3ee"/>
             <circle cx="92" cy="90" r="2.3" fill="#ecfeff"/><circle cx="108" cy="90" r="2.3" fill="#ecfeff"/>
+          </g>
+        </svg>
+
+        <!-- Гиря: махи гирей (в профиль) -->
+        <svg class="robot-side" id="robot-kettlebell" viewBox="0 0 200 250" aria-hidden="true">
+          <defs>
+            <linearGradient id="gmetal" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f1f5f9"/><stop offset=".5" stop-color="#94a3b8"/><stop offset="1" stop-color="#475569"/></linearGradient>
+            <linearGradient id="gmetal2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cbd5e1"/><stop offset="1" stop-color="#334155"/></linearGradient>
+          </defs>
+          <line x1="40" y1="212" x2="160" y2="212" stroke="#334155" stroke-width="4" stroke-linecap="round"/>
+          <!-- ноги (расставлены, слегка согнуты) -->
+          <rect x="72" y="150" width="14" height="60" rx="7" fill="url(#gmetal2)"/><rect x="66" y="204" width="26" height="9" rx="4" fill="#0f172a"/>
+          <rect x="106" y="150" width="15" height="60" rx="7" fill="url(#gmetal)"/><rect x="102" y="204" width="26" height="9" rx="4" fill="#1e293b"/>
+          <!-- торс -->
+          <rect x="82" y="92" width="26" height="62" rx="12" fill="url(#gmetal)" stroke="#cbd5e1" stroke-width="1.5"/>
+          <circle class="r-chest" cx="95" cy="112" r="5" fill="#22d3ee"/>
+          <!-- голова -->
+          <line x1="95" y1="58" x2="95" y2="70" stroke="#94a3b8" stroke-width="3"/>
+          <circle class="r-antenna" cx="95" cy="55" r="5" fill="#22d3ee"/>
+          <rect x="80" y="60" width="32" height="32" rx="14" fill="url(#gmetal)" stroke="#cbd5e1" stroke-width="1.5"/>
+          <circle class="r-eye" cx="104" cy="76" r="6.5" fill="#22d3ee"/><circle cx="106" cy="75" r="2.3" fill="#ecfeff"/>
+          <!-- руки с гирей (качаются от плеча) -->
+          <g id="kb-arms">
+            <rect x="89" y="96" width="12" height="56" rx="6" fill="url(#gmetal2)"/>
+            <rect x="86" y="148" width="18" height="7" rx="3" fill="#475569"/>
+            <circle cx="95" cy="166" r="13" fill="#1e293b" stroke="#475569" stroke-width="3"/>
+          </g>
+        </svg>
+
+        <!-- Жим штанги над головой (анфас) -->
+        <svg class="robot-side" id="robot-barbell" viewBox="0 0 200 250" aria-hidden="true">
+          <defs>
+            <linearGradient id="bmetalx" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f1f5f9"/><stop offset=".5" stop-color="#94a3b8"/><stop offset="1" stop-color="#475569"/></linearGradient>
+            <linearGradient id="bmetalx2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cbd5e1"/><stop offset="1" stop-color="#334155"/></linearGradient>
+          </defs>
+          <line x1="40" y1="214" x2="160" y2="214" stroke="#334155" stroke-width="4" stroke-linecap="round"/>
+          <!-- ноги -->
+          <rect x="84" y="150" width="14" height="58" rx="7" fill="url(#bmetalx)"/><rect x="80" y="204" width="24" height="10" rx="4" fill="#1e293b"/>
+          <rect x="102" y="150" width="14" height="58" rx="7" fill="url(#bmetalx)"/><rect x="98" y="204" width="24" height="10" rx="4" fill="#1e293b"/>
+          <!-- торс -->
+          <rect x="82" y="104" width="36" height="52" rx="13" fill="url(#bmetalx)" stroke="#cbd5e1" stroke-width="1.5"/>
+          <circle class="r-chest" cx="100" cy="126" r="6" fill="#22d3ee"/>
+          <!-- верхние руки (плечи -> локти) -->
+          <rect x="76" y="106" width="11" height="26" rx="5" fill="url(#bmetalx2)"/>
+          <rect x="113" y="106" width="11" height="26" rx="5" fill="url(#bmetalx2)"/>
+          <!-- голова -->
+          <line x1="100" y1="70" x2="100" y2="82" stroke="#94a3b8" stroke-width="3"/>
+          <circle class="r-antenna" cx="100" cy="66" r="5" fill="#22d3ee"/>
+          <rect x="83" y="72" width="34" height="32" rx="14" fill="url(#bmetalx)" stroke="#cbd5e1" stroke-width="1.5"/>
+          <circle class="r-eye" cx="92" cy="86" r="6" fill="#22d3ee"/><circle class="r-eye" cx="108" cy="86" r="6" fill="#22d3ee"/>
+          <circle cx="92" cy="86" r="2.2" fill="#ecfeff"/><circle cx="108" cy="86" r="2.2" fill="#ecfeff"/>
+          <!-- предплечья + штанга (жмут вверх) -->
+          <g id="bb-press">
+            <rect x="77" y="76" width="10" height="34" rx="5" fill="url(#bmetalx)"/>
+            <rect x="113" y="76" width="10" height="34" rx="5" fill="url(#bmetalx)"/>
+            <rect x="44" y="70" width="112" height="8" rx="4" fill="#475569"/>            <!-- гриф -->
+            <rect x="40" y="60" width="12" height="28" rx="3" fill="#1e293b"/><rect x="148" y="60" width="12" height="28" rx="3" fill="#1e293b"/>
+            <rect x="54" y="64" width="9" height="20" rx="2" fill="#334155"/><rect x="137" y="64" width="9" height="20" rx="2" fill="#334155"/>
+          </g>
+        </svg>
+
+        <!-- Гребной тренажёр (в профиль) -->
+        <svg class="robot-side" id="robot-rowing" viewBox="0 0 200 250" aria-hidden="true">
+          <defs>
+            <linearGradient id="rmetalx" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f1f5f9"/><stop offset=".5" stop-color="#94a3b8"/><stop offset="1" stop-color="#475569"/></linearGradient>
+            <linearGradient id="rmetalx2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cbd5e1"/><stop offset="1" stop-color="#334155"/></linearGradient>
+          </defs>
+          <line x1="18" y1="212" x2="182" y2="212" stroke="#334155" stroke-width="4" stroke-linecap="round"/>
+          <!-- рама: маховик спереди (слева), рельс, упор для ног -->
+          <circle cx="34" cy="188" r="16" fill="none" stroke="#475569" stroke-width="6"/>
+          <circle id="rw-fly" cx="34" cy="188" r="8" fill="none" stroke="#64748b" stroke-width="3" stroke-dasharray="4 5"/>
+          <rect x="34" y="200" width="140" height="6" rx="3" fill="#334155"/>
+          <rect x="44" y="182" width="8" height="24" rx="3" fill="#475569"/> <!-- упор для ног -->
+          <line id="rw-cable" x1="34" y1="188" x2="96" y2="150" stroke="#64748b" stroke-width="2"/>
+          <!-- робот сидит и гребёт -->
+          <g id="rw-body">
+            <!-- ноги к упору (влево-вниз) -->
+            <rect x="52" y="176" width="34" height="12" rx="6" fill="url(#rmetalx2)" transform="rotate(20 84 182)"/>
+            <rect x="44" y="182" width="12" height="22" rx="5" fill="url(#rmetalx2)" transform="rotate(-8 50 184)"/>
+            <!-- таз/сиденье -->
+            <ellipse cx="92" cy="180" rx="13" ry="9" fill="url(#rmetalx)"/>
+            <!-- торс (наклон назад) -->
+            <rect x="86" y="120" width="22" height="52" rx="10" fill="url(#rmetalx)" stroke="#cbd5e1" stroke-width="1.5" transform="rotate(-16 96 172)"/>
+            <circle class="r-chest" cx="92" cy="146" r="5" fill="#22d3ee"/>
+            <!-- руки с ручкой -->
+            <rect x="86" y="140" width="34" height="10" rx="5" fill="url(#rmetalx2)"/>
+            <rect x="116" y="136" width="7" height="18" rx="3" fill="#1e293b"/> <!-- ручка -->
+            <!-- голова -->
+            <line x1="86" y1="96" x2="90" y2="108" stroke="#94a3b8" stroke-width="3"/>
+            <circle class="r-antenna" cx="85" cy="93" r="5" fill="#22d3ee"/>
+            <rect x="76" y="98" width="30" height="30" rx="13" fill="url(#rmetalx)" stroke="#cbd5e1" stroke-width="1.5"/>
+            <circle class="r-eye" cx="98" cy="112" r="6" fill="#22d3ee"/><circle cx="100" cy="111" r="2.2" fill="#ecfeff"/>
           </g>
         </svg>
       </div>
