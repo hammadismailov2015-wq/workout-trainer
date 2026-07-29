@@ -191,6 +191,7 @@ function startWorkout(prog) {
     curCal: 0,
     timer: null,
   };
+  warmTTS();   // разблокировать голос внутри жеста «Начать»
   goto("workout");
   document.getElementById("screen-workout").classList.add("active");
   enterStep();
@@ -382,31 +383,43 @@ function beep(kind) {
 //  Голос тренера (Web Speech API — синтез речи)
 // ============================================================
 let voiceOn = localStorage.getItem("gym_voice") !== "off";
+let voices = [];
 let ruVoice = null;
+let ttsWarmed = false;
 
 function pickVoice() {
   if (!("speechSynthesis" in window)) return;
-  const voices = speechSynthesis.getVoices();
-  // Предпочитаем русский голос
-  ruVoice = voices.find(v => /ru[-_]/i.test(v.lang)) ||
+  voices = speechSynthesis.getVoices() || [];
+  // Предпочитаем русский голос; если нет — движок телефона озвучит своим по умолчанию
+  ruVoice = voices.find(v => /(^|[^a-z])ru([-_]|$)/i.test(v.lang)) ||
             voices.find(v => /russian|русск/i.test(v.name)) || null;
 }
 if ("speechSynthesis" in window) {
   pickVoice();
-  speechSynthesis.onvoiceschanged = pickVoice;
+  speechSynthesis.addEventListener("voiceschanged", pickVoice);
+}
+
+// «Пробуждение» синтезатора внутри жеста пользователя (нужно многим Android)
+function warmTTS() {
+  if (ttsWarmed || !("speechSynthesis" in window)) return;
+  ttsWarmed = true;
+  try { const u = new SpeechSynthesisUtterance(" "); u.volume = 0; speechSynthesis.speak(u); } catch (e) {}
 }
 
 function say(text) {
   if (!voiceOn || !("speechSynthesis" in window)) return;
   try {
-    speechSynthesis.cancel();
+    if (!ruVoice || !voices.length) pickVoice();
+    if (speechSynthesis.speaking || speechSynthesis.pending) speechSynthesis.cancel();
     const u = new SpeechSynthesisUtterance(text);
     u.lang = "ru-RU";
     if (ruVoice) u.voice = ruVoice;
     u.rate = 1.0;
-    u.pitch = 0.85;   // чуть ниже — «роботный» тембр
+    u.pitch = 0.9;
     u.volume = 1.0;
     speechSynthesis.speak(u);
+    // Android иногда «засыпает» после cancel — будим
+    setTimeout(() => { try { speechSynthesis.resume(); } catch (e) {} }, 80);
   } catch (e) { /* озвучка не критична */ }
 }
 
@@ -424,7 +437,21 @@ voiceBtn.addEventListener("click", () => {
   voiceOn = !voiceOn;
   localStorage.setItem("gym_voice", voiceOn ? "on" : "off");
   updateVoiceBtn();
-  if (voiceOn) say("Голос тренера включён"); else stopSpeech();
+  if (voiceOn) {
+    warmTTS();
+    say("Голос тренера включён");
+    // Если на телефоне вообще нет голосов — подсказать пользователю
+    setTimeout(() => {
+      pickVoice();
+      if (!("speechSynthesis" in window)) {
+        alert("Этот браузер не поддерживает голос. Попробуй открыть в Chrome.");
+      } else if (!voices.length) {
+        alert("На телефоне не установлен голос синтеза речи.\n\nВключи его: Настройки → Специальные возможности → Синтез речи (или «Язык и ввод» → «Синтез речи») → включи «Google» и скачай русский язык.");
+      }
+    }, 500);
+  } else {
+    stopSpeech();
+  }
 });
 updateVoiceBtn();
 
