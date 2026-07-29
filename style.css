@@ -275,13 +275,13 @@ body {
 .pullup-mode #pl-hang { animation: plPull 1.5s ease-in-out infinite; }
 @keyframes plPull { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-30px); } }
 
-/* Велотренажёр — педали и маховик крутятся, ноги подкачивают */
-.bike-mode #bk-crank { transform-box: view-box; transform-origin: 100px 188px; animation: bkSpin .7s linear infinite; }
-.bike-mode #bk-fly   { transform-box: view-box; transform-origin: 50px 182px;  animation: bkSpin .7s linear infinite; }
+/* Велотренажёр — педали и маховик крутятся, ноги подкачивают от бедра */
+.bike-mode #bk-crank { transform-box: view-box; transform-origin: 100px 186px; animation: bkSpin .7s linear infinite; }
+.bike-mode #bk-fly   { transform-box: view-box; transform-origin: 48px 184px;  animation: bkSpin .7s linear infinite; }
 @keyframes bkSpin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
-.bike-mode #bk-leg-near { transform-box: view-box; transform-origin: 92px 152px; animation: bkLeg .7s ease-in-out infinite; }
-.bike-mode #bk-leg-far  { transform-box: view-box; transform-origin: 88px 152px; animation: bkLeg .7s ease-in-out infinite; animation-delay: -.35s; }
-@keyframes bkLeg { 0%,100% { transform: rotate(-7deg); } 50% { transform: rotate(7deg); } }
+.bike-mode #bk-leg-near { transform-box: view-box; transform-origin: 88px 126px; animation: bkLeg .7s ease-in-out infinite; }
+.bike-mode #bk-leg-far  { transform-box: view-box; transform-origin: 86px 126px; animation: bkLeg .7s ease-in-out infinite; animation-delay: -.35s; }
+@keyframes bkLeg { 0%,100% { transform: rotate(-9deg); } 50% { transform: rotate(9deg); } }
 
 /* Гантели — сгибание рук (бицепс) */
 .db-fore { transform-box: fill-box; transform-origin: 50% 0%; }

@@ -531,35 +531,47 @@
             <linearGradient id="kmetal" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f1f5f9"/><stop offset=".5" stop-color="#94a3b8"/><stop offset="1" stop-color="#475569"/></linearGradient>
             <linearGradient id="kmetal2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cbd5e1"/><stop offset="1" stop-color="#334155"/></linearGradient>
           </defs>
-          <line x1="24" y1="212" x2="176" y2="212" stroke="#334155" stroke-width="4" stroke-linecap="round"/>
-          <!-- рама -->
-          <circle cx="50" cy="182" r="24" fill="none" stroke="#475569" stroke-width="6"/>
-          <circle id="bk-fly" cx="50" cy="182" r="12" fill="none" stroke="#64748b" stroke-width="3" stroke-dasharray="6 6"/>
-          <line x1="50" y1="182" x2="100" y2="188" stroke="#475569" stroke-width="6"/>
-          <line x1="50" y1="182" x2="86" y2="120" stroke="#475569" stroke-width="6"/>
-          <line x1="100" y1="188" x2="124" y2="120" stroke="#475569" stroke-width="6"/>
-          <rect x="122" y="108" width="6" height="18" fill="#475569"/>
-          <rect x="120" y="104" width="26" height="6" rx="3" fill="#64748b"/>
-          <rect x="76" y="112" width="26" height="8" rx="4" fill="#334155"/>
-          <!-- педали (крутятся) -->
+          <line x1="20" y1="212" x2="176" y2="212" stroke="#334155" stroke-width="4" stroke-linecap="round"/>
+          <!-- рама велотренажёра -->
+          <circle cx="48" cy="184" r="22" fill="none" stroke="#475569" stroke-width="7"/>
+          <circle id="bk-fly" cx="48" cy="184" r="11" fill="none" stroke="#64748b" stroke-width="3" stroke-dasharray="5 6"/>
+          <line x1="48" y1="184" x2="100" y2="186" stroke="#475569" stroke-width="7"/>   <!-- нижняя труба к оси педалей -->
+          <line x1="58" y1="184" x2="84" y2="126" stroke="#475569" stroke-width="7"/>    <!-- к седлу -->
+          <line x1="100" y1="186" x2="122" y2="110" stroke="#475569" stroke-width="7"/>  <!-- к рулю -->
+          <rect x="70" y="120" width="32" height="8" rx="4" fill="#1e293b"/>              <!-- седло -->
+          <rect x="118" y="96" width="8" height="16" fill="#475569"/>                     <!-- стойка руля -->
+          <rect x="106" y="92" width="26" height="7" rx="3" fill="#64748b"/>              <!-- руль -->
+          <!-- педали (крутятся вокруг оси 100,186) -->
           <g id="bk-crank">
-            <rect x="97" y="186" width="6" height="24" rx="2" fill="#64748b"/>
-            <rect x="97" y="166" width="6" height="24" rx="2" fill="#94a3b8"/>
-            <rect x="92" y="206" width="16" height="5" rx="2" fill="#1e293b"/>
-            <rect x="92" y="165" width="16" height="5" rx="2" fill="#334155"/>
+            <rect x="98" y="186" width="4" height="18" rx="2" fill="#94a3b8"/>
+            <rect x="98" y="168" width="4" height="18" rx="2" fill="#64748b"/>
+            <rect x="93" y="200" width="15" height="5" rx="2" fill="#1e293b"/>
+            <rect x="93" y="166" width="15" height="5" rx="2" fill="#334155"/>
+            <circle cx="100" cy="186" r="4" fill="#94a3b8"/>
           </g>
-          <!-- робот -->
+          <!-- робот сидит на седле -->
           <g id="bk-robot">
-            <g id="bk-leg-far"><rect x="82" y="150" width="12" height="34" rx="6" fill="url(#kmetal2)" transform="rotate(28 88 152)"/><rect x="92" y="176" width="12" height="34" rx="6" fill="url(#kmetal2)" transform="rotate(-30 100 180)"/></g>
-            <rect x="80" y="82" width="22" height="40" rx="9" fill="url(#kmetal)" stroke="#cbd5e1" stroke-width="1.5" transform="rotate(14 91 118)"/>
-            <circle class="r-chest" cx="94" cy="100" r="5" fill="#22d3ee"/>
-            <rect x="96" y="96" width="34" height="11" rx="5" fill="url(#kmetal2)" transform="rotate(-18 98 100)"/> <!-- рука к рулю -->
-            <g id="bk-leg-near"><rect x="86" y="150" width="13" height="36" rx="6" fill="url(#kmetal)" transform="rotate(30 92 152)"/><rect x="96" y="178" width="13" height="34" rx="6" fill="url(#kmetal)" transform="rotate(-28 102 182)"/></g>
-            <line x1="98" y1="52" x2="102" y2="64" stroke="#94a3b8" stroke-width="3"/>
-            <circle class="r-antenna" cx="97" cy="49" r="5" fill="#22d3ee"/>
-            <rect x="84" y="54" width="32" height="31" rx="14" fill="url(#kmetal)" stroke="#cbd5e1" stroke-width="1.5"/>
-            <circle class="r-eye" cx="108" cy="69" r="6.5" fill="#22d3ee"/>
-            <circle cx="110" cy="68" r="2.3" fill="#ecfeff"/>
+            <!-- дальняя нога (бедро вперёд-вниз, голень к педали) -->
+            <g id="bk-leg-far">
+              <rect x="80" y="122" width="12" height="30" rx="6" fill="url(#kmetal2)" transform="rotate(52 86 126)"/>
+              <rect x="97" y="150" width="11" height="38" rx="5" fill="url(#kmetal2)" transform="rotate(-14 102 152)"/>
+            </g>
+            <!-- торс, лёгкий наклон вперёд -->
+            <rect x="76" y="86" width="22" height="40" rx="9" fill="url(#kmetal)" stroke="#cbd5e1" stroke-width="1.5" transform="rotate(22 85 124)"/>
+            <circle class="r-chest" cx="90" cy="104" r="5" fill="#22d3ee"/>
+            <!-- рука к рулю -->
+            <rect x="90" y="94" width="36" height="10" rx="5" fill="url(#kmetal2)" transform="rotate(-14 92 99)"/>
+            <!-- ближняя нога -->
+            <g id="bk-leg-near">
+              <rect x="82" y="122" width="13" height="32" rx="6" fill="url(#kmetal)" transform="rotate(54 88 126)"/>
+              <rect x="99" y="150" width="12" height="40" rx="6" fill="url(#kmetal)" transform="rotate(-12 105 152)"/>
+            </g>
+            <!-- голова -->
+            <line x1="92" y1="54" x2="96" y2="66" stroke="#94a3b8" stroke-width="3"/>
+            <circle class="r-antenna" cx="91" cy="51" r="5" fill="#22d3ee"/>
+            <rect x="80" y="56" width="32" height="31" rx="14" fill="url(#kmetal)" stroke="#cbd5e1" stroke-width="1.5"/>
+            <circle class="r-eye" cx="104" cy="71" r="6.5" fill="#22d3ee"/>
+            <circle cx="106" cy="70" r="2.3" fill="#ecfeff"/>
           </g>
         </svg>
 
