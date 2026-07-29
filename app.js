@@ -410,7 +410,7 @@ function playClip(name) {
 }
 
 // Вступительная шутка для акцентов (иначе — обычное «Приготовься»)
-const ACCENT_INTRO = { fr: "notfrench", de: "notgerman", gb: "notbritish", tr: "turkjoke" };
+const ACCENT_INTRO = { fr: "notfrench", de: "notgerman", gb: "notbritish", tr: "turkjoke", it: "italjoke", us: "usjoke", es: "esjoke", ja: "jajoke" };
 function prepClip() {
   playClip(ACCENT_INTRO[voiceDir] || "ready");
 }
