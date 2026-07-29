@@ -25,7 +25,6 @@ const EXERCISES = {
   jumprope:  { name: "Скакалка",        ico: "🪢", cal: 12, anim: "jumprope" },
   kettlebell:{ name: "Гиря",            ico: "🔔", cal: 10, anim: "kettlebell" },
   barbell:   { name: "Жим штанги",      ico: "🏋️‍♂️", cal: 8, anim: "barbell" },
-  rowing:    { name: "Гребной тренажёр", ico: "🚣", cal: 11, anim: "rowing" },
 };
 
 // --- Готовые программы ---
@@ -43,7 +42,7 @@ const PROGRAMS = [
   { id: "quick",   emoji: "⏱️", name: "Быстрая 5 мин",  meta: "5 мин · разминка",
     work: 30, rest: 10, rounds: 1, ex: ["jumpjack","squats","pushups","abs","plank","lunges"] },
   { id: "gym",     emoji: "🏋️", name: "На тренировке",  meta: "тренажёры · 12 мин",
-    work: 45, rest: 15, rounds: 1, ex: ["treadmill","pullups","bike","rowing","kettlebell","barbell","dumbbell","jumprope"] },
+    work: 45, rest: 15, rounds: 1, ex: ["treadmill","pullups","bike","kettlebell","barbell","dumbbell","jumprope"] },
 ];
 
 const PREP_TIME = 10; // подготовка перед стартом
@@ -319,7 +318,6 @@ const SIDE_MODES = {
   jumprope: "jumprope-mode",
   kettlebell: "kettlebell-mode",
   barbell: "barbell-mode",
-  rowing: "rowing-mode",
 };
 const ALL_MODES = Object.values(SIDE_MODES);
 function setRobotAnim(anim) {

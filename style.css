@@ -211,10 +211,9 @@ body {
 .wallsit-mode #robot, .lunge-mode #robot,
 .treadmill-mode #robot, .pullup-mode #robot, .bike-mode #robot,
 .dumbbell-mode #robot, .jumprope-mode #robot,
-.kettlebell-mode #robot, .barbell-mode #robot, .rowing-mode #robot { display: none; }
+.kettlebell-mode #robot, .barbell-mode #robot { display: none; }
 .kettlebell-mode #robot-kettlebell { display: block; }
 .barbell-mode #robot-barbell { display: block; }
-.rowing-mode #robot-rowing { display: block; }
 .pushup-mode #robot-pushup, .plank-mode #robot-pushup, .mountain-mode #robot-pushup { display: block; }
 .superman-mode #robot-superman { display: block; }
 .squat-mode #robot-squat { display: block; }
@@ -319,10 +318,6 @@ body {
 .barbell-mode #bb-press { animation: bbPress 1.25s ease-in-out infinite; }
 @keyframes bbPress { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-30px); } }
 
-/* Гребной — корпус едет назад и наклоняется, маховик крутится */
-.rowing-mode #rw-body { transform-box: view-box; transform-origin: 92px 180px; animation: rwPull 1.6s ease-in-out infinite; }
-@keyframes rwPull { 0%,100% { transform: translateX(0) rotate(0); } 50% { transform: translateX(20px) rotate(-12deg); } }
-.rowing-mode #rw-fly { transform-box: view-box; transform-origin: 34px 188px; animation: bkSpin 1.6s linear infinite; }
 
 /* Прыжки / джампинг-джек */
 .anim-jump #r-body { animation: hop .6s ease-in-out infinite; }
