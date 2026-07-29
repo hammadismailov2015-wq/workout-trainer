@@ -1,6 +1,6 @@
 // Service worker — сеть в приоритете, кэш только как офлайн-резерв.
 // (Раньше был «сначала кэш» — из-за него не подтягивались обновления.)
-const CACHE = "trainer-v3";
+const CACHE = "trainer-v4";
 const ASSETS = [
   "./",
   "./index.html",
@@ -27,12 +27,13 @@ self.addEventListener("activate", (e) => {
   );
 });
 
-// Сначала сеть: всегда берём свежее, а при отсутствии сети — из кэша.
+// Сначала сеть, МИМО HTTP-кэша ({cache:"reload"}) — всегда самая свежая версия.
+// При отсутствии сети — из кэша (офлайн-режим сохраняется).
 self.addEventListener("fetch", (e) => {
   const req = e.request;
   if (req.method !== "GET" || new URL(req.url).origin !== self.location.origin) return;
   e.respondWith(
-    fetch(req)
+    fetch(req.url, { cache: "reload" })
       .then((res) => {
         const copy = res.clone();
         caches.open(CACHE).then((c) => c.put(req, copy)).catch(() => {});
