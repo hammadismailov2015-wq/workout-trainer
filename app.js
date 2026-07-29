@@ -5,9 +5,9 @@
 // --- Каталог упражнений ---
 // anim — как робот-тренер показывает упражнение (класс анимации)
 const EXERCISES = {
-  squats:    { name: "Приседания",     ico: "🦵", cal: 8,  anim: "squat" },
+  squats:    { name: "Приседания",     ico: "🦵", cal: 8,  anim: "squatside" },
   pushups:   { name: "Отжимания",      ico: "💪", cal: 8,  anim: "pushup" },
-  abs:       { name: "Пресс",          ico: "🔥", cal: 7,  anim: "core" },
+  abs:       { name: "Пресс",          ico: "🔥", cal: 7,  anim: "crunch" },
   plank:     { name: "Планка",         ico: "🧘", cal: 5,  anim: "plank" },
   lunges:    { name: "Выпады",         ico: "🚶", cal: 8,  anim: "squat" },
   burpee:    { name: "Бёрпи",          ico: "⚡", cal: 12, anim: "jump" },
@@ -240,11 +240,13 @@ const SIDE_MODES = {
   plank: "plank-mode",
   mountain: "mountain-mode",
   superman: "superman-mode",
+  squatside: "squat-mode",
+  crunch: "crunch-mode",
 };
 function setRobotAnim(anim) {
   const robot = document.getElementById("robot");
   const stage = document.getElementById("robot-stage");
-  stage.classList.remove("pushup-mode", "plank-mode", "mountain-mode", "superman-mode");
+  stage.classList.remove("pushup-mode", "plank-mode", "mountain-mode", "superman-mode", "squat-mode", "crunch-mode");
   if (SIDE_MODES[anim]) {
     stage.classList.add(SIDE_MODES[anim]);     // профильный робот
   } else if (robot) {

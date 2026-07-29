@@ -184,9 +184,12 @@ body {
 
 /* Профильные роботы (лицом/животом к полу): отжимания, планка, скалолаз, супермен */
 .robot-side { display: none; height: 195px; width: auto; overflow: visible; }
-.pushup-mode #robot, .plank-mode #robot, .mountain-mode #robot, .superman-mode #robot { display: none; }
+.pushup-mode #robot, .plank-mode #robot, .mountain-mode #robot, .superman-mode #robot,
+.squat-mode #robot, .crunch-mode #robot { display: none; }
 .pushup-mode #robot-pushup, .plank-mode #robot-pushup, .mountain-mode #robot-pushup { display: block; }
 .superman-mode #robot-superman { display: block; }
+.squat-mode #robot-squat { display: block; }
+.crunch-mode #robot-crunch { display: block; }
 
 /* голова свисает вниз, глаз смотрит в пол */
 #pu-head { transform-box: fill-box; transform-origin: 6% 42%; transform: rotate(40deg); }
@@ -208,6 +211,14 @@ body {
 /* Супермен — руки, ноги и голова поднимаются и опускаются («полёт») */
 .superman-mode #sm-lift { animation: smFly 1.6s ease-in-out infinite; }
 @keyframes smFly { 0%,100% { transform: translateY(7px); } 50% { transform: translateY(-7px); } }
+
+/* Приседание — сгибается в колене, корпус опускается (руки вперёд) */
+.squat-mode #sq-thigh { transform-box: view-box; transform-origin: 100px 174px; animation: sqDown 1.5s ease-in-out infinite; }
+@keyframes sqDown { 0%,100% { transform: rotate(0); } 50% { transform: rotate(34deg); } }
+
+/* Пресс — корпус поднимается к коленям (скручивание) */
+.crunch-mode #ab-torso { transform-box: view-box; transform-origin: 106px 196px; animation: abUp 1.4s ease-in-out infinite; }
+@keyframes abUp { 0%,100% { transform: rotate(0); } 50% { transform: rotate(34deg); } }
 
 /* Прыжки / джампинг-джек */
 .anim-jump #r-body { animation: hop .6s ease-in-out infinite; }
