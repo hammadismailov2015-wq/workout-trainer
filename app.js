@@ -214,7 +214,7 @@ function enterStep() {
     phase.textContent = "Приготовься";
     name.textContent = "Начинаем!";
     next.textContent = "Первое: " + EXERCISES[W.seq[1].key].name;
-    playClip("ready");
+    prepClip();
   } else if (step.type === "rest") {
     body.classList.add("rest");
     setRobotAnim("idle");
@@ -382,6 +382,9 @@ function beep(kind) {
 //  Голос тренера — встроенные аудиофайлы (работают на любом телефоне)
 // ============================================================
 let voiceOn = localStorage.getItem("gym_voice") !== "off";
+let voiceDir = localStorage.getItem("gym_vsound") || "m";      // m | f | fr
+let voiceSpeed = localStorage.getItem("gym_vspeed") || "normal"; // slow | normal | fast
+const SPEED_RATE = { slow: 0.85, normal: 1.0, fast: 1.25 };
 let audioEl = null;
 
 function getAudio() {
@@ -397,18 +400,25 @@ function playClip(name) {
   try {
     const a = getAudio();
     a.muted = false;
-    a.src = "audio/" + name + ".mp3";
+    a.src = "audio/" + voiceDir + "/" + name + ".mp3";
     a.currentTime = 0;
+    a.preservesPitch = true; a.mozPreservesPitch = true; a.webkitPreservesPitch = true;
+    a.playbackRate = SPEED_RATE[voiceSpeed] || 1.0;
     const pr = a.play();
     if (pr && pr.catch) pr.catch(() => {});
   } catch (e) {}
+}
+
+// Фраза для «Приготовься»: во французском режиме — шутка «я не француз»
+function prepClip() {
+  playClip(voiceDir === "fr" ? "notfrench" : "ready");
 }
 
 function stopClip() {
   try { if (audioEl) { audioEl.pause(); audioEl.currentTime = 0; } } catch (e) {}
 }
 
-// Переключатель голоса
+// Переключатель голоса (быстрое вкл/выкл)
 const voiceBtn = document.getElementById("voice-toggle");
 function updateVoiceBtn() {
   voiceBtn.textContent = voiceOn ? "🔊" : "🔇";
@@ -421,6 +431,32 @@ voiceBtn.addEventListener("click", () => {
   if (voiceOn) playClip("voiceon"); else stopClip();
 });
 updateVoiceBtn();
+
+// --- Экран настроек ---
+function renderSettings() {
+  document.querySelectorAll("#opt-voice .opt").forEach(b => b.classList.toggle("on", b.dataset.v === voiceDir));
+  document.querySelectorAll("#opt-speed .opt").forEach(b => b.classList.toggle("on", b.dataset.s === voiceSpeed));
+}
+document.querySelectorAll("#opt-voice .opt").forEach(btn => {
+  btn.addEventListener("click", () => {
+    voiceDir = btn.dataset.v;
+    localStorage.setItem("gym_vsound", voiceDir);
+    renderSettings();
+    voiceOn = true; localStorage.setItem("gym_voice", "on"); updateVoiceBtn();
+    // Проиграть пример: во французском — сразу шутка «я не француз»
+    playClip(voiceDir === "fr" ? "notfrench" : "voiceon");
+  });
+});
+document.querySelectorAll("#opt-speed .opt").forEach(btn => {
+  btn.addEventListener("click", () => {
+    voiceSpeed = btn.dataset.s;
+    localStorage.setItem("gym_vspeed", voiceSpeed);
+    renderSettings();
+    voiceOn = true; localStorage.setItem("gym_voice", "on"); updateVoiceBtn();
+    playClip("voiceon");
+  });
+});
+renderSettings();
 
 // ============================================================
 //  PWA — установка на телефон и офлайн-режим

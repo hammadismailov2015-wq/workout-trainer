@@ -20,6 +20,7 @@
   <!-- ЭКРАН: Главная -->
   <section class="screen active" id="screen-home">
     <header class="app-header">
+      <button class="settings-btn" id="settings-btn" data-goto="settings" title="Настройки" aria-label="Настройки">⚙️</button>
       <button class="voice-toggle" id="voice-toggle" title="Голос тренера" aria-label="Голос тренера">🔊</button>
       <h1>💪 Тренажёр</h1>
       <p class="subtitle">Тренировки дома без оборудования</p>
@@ -51,6 +52,35 @@
         <span class="program-meta">выбери упражнения</span>
       </button>
     </div>
+  </section>
+
+  <!-- ЭКРАН: Настройки -->
+  <section class="screen" id="screen-settings">
+    <header class="screen-header">
+      <button class="back-btn" data-goto="home">‹ Назад</button>
+      <h2>Настройки</h2>
+    </header>
+
+    <div class="settings-group">
+      <p class="settings-label">🎙️ Голос тренера</p>
+      <div class="opt-row" id="opt-voice">
+        <button class="opt" data-v="m">👨 Мужской</button>
+        <button class="opt" data-v="f">👩 Женский</button>
+        <button class="opt" data-v="fr">🇫🇷 Французский акцент</button>
+      </div>
+      <p class="settings-hint">«Французский акцент» — шутка: робот говорит с акцентом и сам признаётся, что вообще-то не француз 😄</p>
+    </div>
+
+    <div class="settings-group">
+      <p class="settings-label">⏩ Скорость речи</p>
+      <div class="opt-row" id="opt-speed">
+        <button class="opt" data-s="slow">🐢 Медленно</button>
+        <button class="opt" data-s="normal">😊 Обычно</button>
+        <button class="opt" data-s="fast">⚡ Быстро</button>
+      </div>
+    </div>
+
+    <p class="settings-hint">Нажми вариант — робот сразу произнесёт пример.</p>
   </section>
 
   <!-- ЭКРАН: Конструктор своей тренировки -->
