@@ -430,6 +430,157 @@
             <circle cx="117" cy="90" r="2.3" fill="#ecfeff"/>
           </g>
         </svg>
+
+        <!-- Беговая дорожка: робот бежит на дорожке -->
+        <svg class="robot-side" id="robot-treadmill" viewBox="0 0 200 250" aria-hidden="true">
+          <defs>
+            <linearGradient id="tmetal" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f1f5f9"/><stop offset=".5" stop-color="#94a3b8"/><stop offset="1" stop-color="#475569"/></linearGradient>
+            <linearGradient id="tmetal2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cbd5e1"/><stop offset="1" stop-color="#334155"/></linearGradient>
+          </defs>
+          <rect x="150" y="104" width="7" height="98" fill="#475569"/>
+          <rect x="134" y="98" width="30" height="14" rx="3" fill="#64748b"/>
+          <rect x="112" y="150" width="46" height="6" rx="3" fill="#475569"/>
+          <rect x="26" y="200" width="128" height="12" rx="4" fill="#334155"/>
+          <g id="tm-belt">
+            <line x1="34" y1="206" x2="44" y2="206" stroke="#64748b" stroke-width="3"/>
+            <line x1="56" y1="206" x2="66" y2="206" stroke="#64748b" stroke-width="3"/>
+            <line x1="78" y1="206" x2="88" y2="206" stroke="#64748b" stroke-width="3"/>
+            <line x1="100" y1="206" x2="110" y2="206" stroke="#64748b" stroke-width="3"/>
+            <line x1="122" y1="206" x2="132" y2="206" stroke="#64748b" stroke-width="3"/>
+          </g>
+          <g id="tm-run">
+            <g class="tm-leg" id="tm-leg-far"><rect x="84" y="150" width="13" height="48" rx="6" fill="url(#tmetal2)"/><rect x="80" y="194" width="22" height="8" rx="3" fill="#1e293b"/></g>
+            <g class="tm-arm" id="tm-arm-far"><rect x="98" y="112" width="11" height="30" rx="5" fill="url(#tmetal2)"/></g>
+            <rect x="82" y="106" width="22" height="46" rx="9" fill="url(#tmetal)" stroke="#cbd5e1" stroke-width="1.5"/>
+            <circle class="r-chest" cx="93" cy="124" r="5" fill="#22d3ee"/>
+            <g class="tm-arm" id="tm-arm-near"><rect x="94" y="112" width="12" height="32" rx="6" fill="url(#tmetal)"/></g>
+            <g class="tm-leg" id="tm-leg-near"><rect x="90" y="150" width="14" height="48" rx="6" fill="url(#tmetal)"/><rect x="86" y="194" width="24" height="9" rx="3" fill="#1e293b"/></g>
+            <line x1="93" y1="76" x2="93" y2="88" stroke="#94a3b8" stroke-width="3"/>
+            <circle class="r-antenna" cx="93" cy="72" r="5" fill="#22d3ee"/>
+            <rect x="79" y="78" width="30" height="30" rx="13" fill="url(#tmetal)" stroke="#cbd5e1" stroke-width="1.5"/>
+            <circle class="r-eye" cx="102" cy="92" r="6" fill="#22d3ee"/>
+            <circle cx="104" cy="91" r="2.2" fill="#ecfeff"/>
+          </g>
+        </svg>
+
+        <!-- Турник: робот подтягивается -->
+        <svg class="robot-side" id="robot-pullup" viewBox="0 0 200 250" aria-hidden="true">
+          <defs>
+            <linearGradient id="umetal" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f1f5f9"/><stop offset=".5" stop-color="#94a3b8"/><stop offset="1" stop-color="#475569"/></linearGradient>
+            <linearGradient id="umetal2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cbd5e1"/><stop offset="1" stop-color="#334155"/></linearGradient>
+          </defs>
+          <rect x="30" y="46" width="8" height="176" fill="#334155"/>
+          <rect x="162" y="46" width="8" height="176" fill="#334155"/>
+          <rect x="30" y="42" width="140" height="9" rx="4" fill="#64748b"/>
+          <!-- статичные руки от перекладины (кисти на перекладине) -->
+          <circle cx="80" cy="48" r="6" fill="#475569"/><circle cx="120" cy="48" r="6" fill="#475569"/>
+          <rect x="74" y="48" width="11" height="92" rx="5" fill="url(#umetal2)"/>
+          <rect x="115" y="48" width="11" height="92" rx="5" fill="url(#umetal2)"/>
+          <!-- тело подтягивается -->
+          <g id="pl-hang">
+            <rect x="86" y="110" width="28" height="50" rx="11" fill="url(#umetal)" stroke="#cbd5e1" stroke-width="1.5"/>
+            <circle class="r-chest" cx="100" cy="130" r="6" fill="#22d3ee"/>
+            <rect x="90" y="158" width="14" height="42" rx="7" fill="url(#umetal2)" transform="rotate(9 97 160)"/>
+            <rect x="98" y="158" width="14" height="42" rx="7" fill="url(#umetal2)" transform="rotate(-9 105 160)"/>
+            <rect x="84" y="78" width="32" height="32" rx="14" fill="url(#umetal)" stroke="#cbd5e1" stroke-width="1.5"/>
+            <circle class="r-eye" cx="93" cy="92" r="6.5" fill="#22d3ee"/><circle class="r-eye" cx="107" cy="92" r="6.5" fill="#22d3ee"/>
+            <circle cx="93" cy="92" r="2.3" fill="#ecfeff"/><circle cx="107" cy="92" r="2.3" fill="#ecfeff"/>
+          </g>
+        </svg>
+
+        <!-- Велотренажёр: робот крутит педали -->
+        <svg class="robot-side" id="robot-bike" viewBox="0 0 200 250" aria-hidden="true">
+          <defs>
+            <linearGradient id="kmetal" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f1f5f9"/><stop offset=".5" stop-color="#94a3b8"/><stop offset="1" stop-color="#475569"/></linearGradient>
+            <linearGradient id="kmetal2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cbd5e1"/><stop offset="1" stop-color="#334155"/></linearGradient>
+          </defs>
+          <line x1="24" y1="212" x2="176" y2="212" stroke="#334155" stroke-width="4" stroke-linecap="round"/>
+          <!-- рама -->
+          <circle cx="50" cy="182" r="24" fill="none" stroke="#475569" stroke-width="6"/>
+          <circle id="bk-fly" cx="50" cy="182" r="12" fill="none" stroke="#64748b" stroke-width="3" stroke-dasharray="6 6"/>
+          <line x1="50" y1="182" x2="100" y2="188" stroke="#475569" stroke-width="6"/>
+          <line x1="50" y1="182" x2="86" y2="120" stroke="#475569" stroke-width="6"/>
+          <line x1="100" y1="188" x2="124" y2="120" stroke="#475569" stroke-width="6"/>
+          <rect x="122" y="108" width="6" height="18" fill="#475569"/>
+          <rect x="120" y="104" width="26" height="6" rx="3" fill="#64748b"/>
+          <rect x="76" y="112" width="26" height="8" rx="4" fill="#334155"/>
+          <!-- педали (крутятся) -->
+          <g id="bk-crank">
+            <rect x="97" y="186" width="6" height="24" rx="2" fill="#64748b"/>
+            <rect x="97" y="166" width="6" height="24" rx="2" fill="#94a3b8"/>
+            <rect x="92" y="206" width="16" height="5" rx="2" fill="#1e293b"/>
+            <rect x="92" y="165" width="16" height="5" rx="2" fill="#334155"/>
+          </g>
+          <!-- робот -->
+          <g id="bk-robot">
+            <g id="bk-leg-far"><rect x="82" y="150" width="12" height="34" rx="6" fill="url(#kmetal2)" transform="rotate(28 88 152)"/><rect x="92" y="176" width="12" height="34" rx="6" fill="url(#kmetal2)" transform="rotate(-30 100 180)"/></g>
+            <rect x="80" y="82" width="22" height="40" rx="9" fill="url(#kmetal)" stroke="#cbd5e1" stroke-width="1.5" transform="rotate(14 91 118)"/>
+            <circle class="r-chest" cx="94" cy="100" r="5" fill="#22d3ee"/>
+            <rect x="96" y="96" width="34" height="11" rx="5" fill="url(#kmetal2)" transform="rotate(-18 98 100)"/> <!-- рука к рулю -->
+            <g id="bk-leg-near"><rect x="86" y="150" width="13" height="36" rx="6" fill="url(#kmetal)" transform="rotate(30 92 152)"/><rect x="96" y="178" width="13" height="34" rx="6" fill="url(#kmetal)" transform="rotate(-28 102 182)"/></g>
+            <line x1="98" y1="52" x2="102" y2="64" stroke="#94a3b8" stroke-width="3"/>
+            <circle class="r-antenna" cx="97" cy="49" r="5" fill="#22d3ee"/>
+            <rect x="84" y="54" width="32" height="31" rx="14" fill="url(#kmetal)" stroke="#cbd5e1" stroke-width="1.5"/>
+            <circle class="r-eye" cx="108" cy="69" r="6.5" fill="#22d3ee"/>
+            <circle cx="110" cy="68" r="2.3" fill="#ecfeff"/>
+          </g>
+        </svg>
+
+        <!-- Гантели: робот сгибает руки с гантелями -->
+        <svg class="robot-side" id="robot-dumbbell" viewBox="0 0 200 250" aria-hidden="true">
+          <defs>
+            <linearGradient id="dmetal" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f1f5f9"/><stop offset=".5" stop-color="#94a3b8"/><stop offset="1" stop-color="#475569"/></linearGradient>
+            <linearGradient id="dmetal2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cbd5e1"/><stop offset="1" stop-color="#334155"/></linearGradient>
+          </defs>
+          <line x1="52" y1="216" x2="150" y2="216" stroke="#334155" stroke-width="4" stroke-linecap="round"/>
+          <rect x="86" y="170" width="13" height="46" rx="6" fill="url(#dmetal2)"/>
+          <rect x="101" y="170" width="14" height="46" rx="6" fill="url(#dmetal)"/>
+          <rect x="84" y="108" width="32" height="66" rx="13" fill="url(#dmetal)" stroke="#cbd5e1" stroke-width="1.5"/>
+          <circle class="r-chest" cx="100" cy="130" r="6" fill="#22d3ee"/>
+          <g stroke="#334155" stroke-width="2" opacity=".55"><line x1="92" y1="142" x2="108" y2="142"/><line x1="92" y1="150" x2="108" y2="150"/></g>
+          <!-- верхние руки (статично у корпуса) -->
+          <rect x="79" y="112" width="10" height="34" rx="5" fill="url(#dmetal2)"/>
+          <rect x="111" y="112" width="10" height="34" rx="5" fill="url(#dmetal2)"/>
+          <!-- предплечья с гантелями (сгибаются) -->
+          <g class="db-fore" id="db-fore-l">
+            <rect x="79" y="140" width="10" height="34" rx="5" fill="url(#dmetal)"/>
+            <g transform="translate(84,176)"><rect x="-10" y="-5" width="20" height="10" rx="3" fill="#1e293b"/><rect x="-13" y="-8" width="5" height="16" rx="2" fill="#475569"/><rect x="8" y="-8" width="5" height="16" rx="2" fill="#475569"/></g>
+          </g>
+          <g class="db-fore" id="db-fore-r">
+            <rect x="111" y="140" width="10" height="34" rx="5" fill="url(#dmetal)"/>
+            <g transform="translate(116,176)"><rect x="-10" y="-5" width="20" height="10" rx="3" fill="#1e293b"/><rect x="-13" y="-8" width="5" height="16" rx="2" fill="#475569"/><rect x="8" y="-8" width="5" height="16" rx="2" fill="#475569"/></g>
+          </g>
+          <line x1="100" y1="74" x2="100" y2="86" stroke="#94a3b8" stroke-width="3"/>
+          <circle class="r-antenna" cx="100" cy="70" r="5" fill="#22d3ee"/>
+          <rect x="83" y="76" width="34" height="32" rx="14" fill="url(#dmetal)" stroke="#cbd5e1" stroke-width="1.5"/>
+          <circle class="r-eye" cx="92" cy="90" r="6.5" fill="#22d3ee"/><circle class="r-eye" cx="108" cy="90" r="6.5" fill="#22d3ee"/>
+          <circle cx="92" cy="90" r="2.3" fill="#ecfeff"/><circle cx="108" cy="90" r="2.3" fill="#ecfeff"/>
+        </svg>
+
+        <!-- Скакалка: робот прыгает через скакалку -->
+        <svg class="robot-side" id="robot-jumprope" viewBox="0 0 200 250" aria-hidden="true">
+          <defs>
+            <linearGradient id="jmetal" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f1f5f9"/><stop offset=".5" stop-color="#94a3b8"/><stop offset="1" stop-color="#475569"/></linearGradient>
+            <linearGradient id="jmetal2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cbd5e1"/><stop offset="1" stop-color="#334155"/></linearGradient>
+          </defs>
+          <line x1="30" y1="214" x2="170" y2="214" stroke="#334155" stroke-width="4" stroke-linecap="round"/>
+          <path id="jr-rope-down" d="M80,126 Q100,286 120,126" fill="none" stroke="#f59e0b" stroke-width="3" stroke-linecap="round"/>
+          <path id="jr-rope-up" d="M80,126 Q100,-26 120,126" fill="none" stroke="#f59e0b" stroke-width="3" stroke-linecap="round"/>
+          <g id="jr-body">
+            <rect x="90" y="150" width="9" height="42" rx="4" fill="url(#jmetal2)"/>
+            <rect x="101" y="150" width="9" height="42" rx="4" fill="url(#jmetal)"/>
+            <rect x="98" y="188" width="16" height="8" rx="3" fill="#1e293b"/><rect x="86" y="188" width="16" height="8" rx="3" fill="#1e293b"/>
+            <rect x="86" y="108" width="28" height="46" rx="11" fill="url(#jmetal)" stroke="#cbd5e1" stroke-width="1.5"/>
+            <circle class="r-chest" cx="100" cy="126" r="5" fill="#22d3ee"/>
+            <rect x="74" y="118" width="12" height="30" rx="5" fill="url(#jmetal2)" transform="rotate(24 84 120)"/> <!-- рука с ручкой -->
+            <rect x="114" y="118" width="12" height="30" rx="5" fill="url(#jmetal2)" transform="rotate(-24 116 120)"/>
+            <line x1="100" y1="74" x2="100" y2="86" stroke="#94a3b8" stroke-width="3"/>
+            <circle class="r-antenna" cx="100" cy="70" r="5" fill="#22d3ee"/>
+            <rect x="84" y="76" width="32" height="32" rx="14" fill="url(#jmetal)" stroke="#cbd5e1" stroke-width="1.5"/>
+            <circle class="r-eye" cx="92" cy="90" r="6.5" fill="#22d3ee"/><circle class="r-eye" cx="108" cy="90" r="6.5" fill="#22d3ee"/>
+            <circle cx="92" cy="90" r="2.3" fill="#ecfeff"/><circle cx="108" cy="90" r="2.3" fill="#ecfeff"/>
+          </g>
+        </svg>
       </div>
       <h2 class="exercise-name" id="ex-name">Разминка</h2>
       <div class="timer-ring">

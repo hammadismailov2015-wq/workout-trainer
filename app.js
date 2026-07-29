@@ -17,6 +17,12 @@ const EXERCISES = {
   highknees: { name: "Бег с колен.",   ico: "🏃", cal: 11, anim: "run" },
   superman:  { name: "Супермен",       ico: "🦸", cal: 5,  anim: "superman" },
   wallsit:   { name: "Стульчик",       ico: "🪑", cal: 6,  anim: "wallsit" },
+  // --- На тренировке (тренажёры) ---
+  treadmill: { name: "Беговая дорожка", ico: "🏃", cal: 11, anim: "treadmill" },
+  pullups:   { name: "Турник",          ico: "🤸", cal: 9,  anim: "pullup" },
+  bike:      { name: "Велотренажёр",    ico: "🚴", cal: 10, anim: "bike" },
+  dumbbell:  { name: "Гантели",         ico: "🏋️", cal: 7,  anim: "dumbbell" },
+  jumprope:  { name: "Скакалка",        ico: "🪢", cal: 12, anim: "jumprope" },
 };
 
 // --- Готовые программы ---
@@ -33,6 +39,8 @@ const PROGRAMS = [
     work: 35, rest: 15, rounds: 3, ex: ["jumpjack","burpee","highknees","mountain"] },
   { id: "quick",   emoji: "⏱️", name: "Быстрая 5 мин",  meta: "5 мин · разминка",
     work: 30, rest: 10, rounds: 1, ex: ["jumpjack","squats","pushups","abs","plank","lunges"] },
+  { id: "gym",     emoji: "🏋️", name: "На тренировке",  meta: "тренажёры · 12 мин",
+    work: 45, rest: 20, rounds: 2, ex: ["treadmill","pullups","bike","dumbbell","jumprope"] },
 ];
 
 const PREP_TIME = 10; // подготовка перед стартом
@@ -245,11 +253,17 @@ const SIDE_MODES = {
   legraise: "legraise-mode",
   wallsit: "wallsit-mode",
   lunge: "lunge-mode",
+  treadmill: "treadmill-mode",
+  pullup: "pullup-mode",
+  bike: "bike-mode",
+  dumbbell: "dumbbell-mode",
+  jumprope: "jumprope-mode",
 };
+const ALL_MODES = Object.values(SIDE_MODES);
 function setRobotAnim(anim) {
   const robot = document.getElementById("robot");
   const stage = document.getElementById("robot-stage");
-  stage.classList.remove("pushup-mode", "plank-mode", "mountain-mode", "superman-mode", "squat-mode", "crunch-mode", "legraise-mode", "wallsit-mode", "lunge-mode");
+  stage.classList.remove(...ALL_MODES);
   if (SIDE_MODES[anim]) {
     stage.classList.add(SIDE_MODES[anim]);     // профильный робот
   } else if (robot) {

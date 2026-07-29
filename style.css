@@ -186,7 +186,9 @@ body {
 .robot-side { display: none; height: 195px; width: auto; overflow: visible; }
 .pushup-mode #robot, .plank-mode #robot, .mountain-mode #robot, .superman-mode #robot,
 .squat-mode #robot, .crunch-mode #robot, .legraise-mode #robot,
-.wallsit-mode #robot, .lunge-mode #robot { display: none; }
+.wallsit-mode #robot, .lunge-mode #robot,
+.treadmill-mode #robot, .pullup-mode #robot, .bike-mode #robot,
+.dumbbell-mode #robot, .jumprope-mode #robot { display: none; }
 .pushup-mode #robot-pushup, .plank-mode #robot-pushup, .mountain-mode #robot-pushup { display: block; }
 .superman-mode #robot-superman { display: block; }
 .squat-mode #robot-squat { display: block; }
@@ -194,6 +196,11 @@ body {
 .legraise-mode #robot-legraise { display: block; }
 .wallsit-mode #robot-wallsit { display: block; }
 .lunge-mode #robot-lunge { display: block; }
+.treadmill-mode #robot-treadmill { display: block; }
+.pullup-mode #robot-pullup { display: block; }
+.bike-mode #robot-bike { display: block; }
+.dumbbell-mode #robot-dumbbell { display: block; }
+.jumprope-mode #robot-jumprope { display: block; }
 
 /* голова свисает вниз, глаз смотрит в пол */
 #pu-head { transform-box: fill-box; transform-origin: 6% 42%; transform: rotate(40deg); }
@@ -235,6 +242,48 @@ body {
 /* Выпады — верх опускается (колени сгибаются), стопы на полу */
 .lunge-mode #ln-all { animation: lnDip 1.35s ease-in-out infinite; }
 @keyframes lnDip { 0%,100% { transform: translateY(-2px); } 50% { transform: translateY(20px); } }
+
+/* ===== На тренировке (тренажёры) ===== */
+
+/* Беговая дорожка — бег на месте, лента едет */
+.tm-leg, .tm-arm { transform-box: fill-box; transform-origin: 50% 0%; }
+.treadmill-mode #tm-run { animation: tmHop .44s ease-in-out infinite; }
+@keyframes tmHop { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+.treadmill-mode #tm-leg-near { animation: tmLeg .44s ease-in-out infinite; }
+.treadmill-mode #tm-leg-far  { animation: tmLeg .44s ease-in-out infinite; animation-delay: -.22s; }
+@keyframes tmLeg { 0%,100% { transform: rotate(26deg); } 50% { transform: rotate(-40deg); } }
+.treadmill-mode #tm-arm-near { animation: tmArm .44s ease-in-out infinite; animation-delay: -.22s; }
+.treadmill-mode #tm-arm-far  { animation: tmArm .44s ease-in-out infinite; }
+@keyframes tmArm { 0%,100% { transform: rotate(-30deg); } 50% { transform: rotate(34deg); } }
+.treadmill-mode #tm-belt { animation: tmBelt .4s linear infinite; }
+@keyframes tmBelt { from { transform: translateX(0); } to { transform: translateX(-22px); } }
+
+/* Турник — подтягивание вверх/вниз */
+.pullup-mode #pl-hang { animation: plPull 1.5s ease-in-out infinite; }
+@keyframes plPull { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-30px); } }
+
+/* Велотренажёр — педали и маховик крутятся, ноги подкачивают */
+.bike-mode #bk-crank { transform-box: view-box; transform-origin: 100px 188px; animation: bkSpin .7s linear infinite; }
+.bike-mode #bk-fly   { transform-box: view-box; transform-origin: 50px 182px;  animation: bkSpin .7s linear infinite; }
+@keyframes bkSpin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
+.bike-mode #bk-leg-near { transform-box: view-box; transform-origin: 92px 152px; animation: bkLeg .7s ease-in-out infinite; }
+.bike-mode #bk-leg-far  { transform-box: view-box; transform-origin: 88px 152px; animation: bkLeg .7s ease-in-out infinite; animation-delay: -.35s; }
+@keyframes bkLeg { 0%,100% { transform: rotate(-7deg); } 50% { transform: rotate(7deg); } }
+
+/* Гантели — сгибание рук (бицепс) */
+.db-fore { transform-box: fill-box; transform-origin: 50% 0%; }
+.dumbbell-mode #db-fore-l { animation: dbCurlL 1.3s ease-in-out infinite; }
+.dumbbell-mode #db-fore-r { animation: dbCurlR 1.3s ease-in-out infinite; }
+@keyframes dbCurlL { 0%,100% { transform: rotate(0); } 50% { transform: rotate(-142deg); } }
+@keyframes dbCurlR { 0%,100% { transform: rotate(0); } 50% { transform: rotate(142deg); } }
+
+/* Скакалка — прыжки, верёвка крутится (над головой ↔ под ногами) */
+.jumprope-mode #jr-body { animation: jrHop .5s ease-in-out infinite; }
+@keyframes jrHop { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+.jumprope-mode #jr-rope-up   { animation: jrUp .5s linear infinite; }
+.jumprope-mode #jr-rope-down { animation: jrDown .5s linear infinite; }
+@keyframes jrUp   { 0%,44% { opacity: 1; } 50%,94% { opacity: 0; } 100% { opacity: 1; } }
+@keyframes jrDown { 0%,44% { opacity: 0; } 50%,94% { opacity: 1; } 100% { opacity: 0; } }
 
 /* Прыжки / джампинг-джек */
 .anim-jump #r-body { animation: hop .6s ease-in-out infinite; }
