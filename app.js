@@ -409,9 +409,10 @@ function playClip(name) {
   } catch (e) {}
 }
 
-// Фраза для «Приготовься»: во французском режиме — шутка «я не француз»
+// Вступительная шутка для акцентов (иначе — обычное «Приготовься»)
+const ACCENT_INTRO = { fr: "notfrench", de: "notgerman" };
 function prepClip() {
-  playClip(voiceDir === "fr" ? "notfrench" : "ready");
+  playClip(ACCENT_INTRO[voiceDir] || "ready");
 }
 
 function stopClip() {
@@ -443,8 +444,8 @@ document.querySelectorAll("#opt-voice .opt").forEach(btn => {
     localStorage.setItem("gym_vsound", voiceDir);
     renderSettings();
     voiceOn = true; localStorage.setItem("gym_voice", "on"); updateVoiceBtn();
-    // Проиграть пример: во французском — сразу шутка «я не француз»
-    playClip(voiceDir === "fr" ? "notfrench" : "voiceon");
+    // Проиграть пример: у акцентов — сразу шутка-разоблачение
+    playClip(ACCENT_INTRO[voiceDir] || "voiceon");
   });
 });
 document.querySelectorAll("#opt-speed .opt").forEach(btn => {
