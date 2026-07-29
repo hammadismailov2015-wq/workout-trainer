@@ -399,27 +399,31 @@ if ("speechSynthesis" in window) {
   speechSynthesis.addEventListener("voiceschanged", pickVoice);
 }
 
-// «Пробуждение» синтезатора внутри жеста пользователя (нужно многим Android)
+// Разбудить движок и подгрузить голоса (без произнесения — чтобы не конфликтовать с speak)
 function warmTTS() {
-  if (ttsWarmed || !("speechSynthesis" in window)) return;
+  if (!("speechSynthesis" in window)) return;
   ttsWarmed = true;
-  try { const u = new SpeechSynthesisUtterance(" "); u.volume = 0; speechSynthesis.speak(u); } catch (e) {}
+  try { speechSynthesis.getVoices(); speechSynthesis.resume(); } catch (e) {}
 }
 
 function say(text) {
   if (!voiceOn || !("speechSynthesis" in window)) return;
   try {
-    if (!ruVoice || !voices.length) pickVoice();
-    if (speechSynthesis.speaking || speechSynthesis.pending) speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(text);
-    u.lang = "ru-RU";
-    if (ruVoice) u.voice = ruVoice;
-    u.rate = 1.0;
-    u.pitch = 0.9;
-    u.volume = 1.0;
-    speechSynthesis.speak(u);
-    // Android иногда «засыпает» после cancel — будим
-    setTimeout(() => { try { speechSynthesis.resume(); } catch (e) {} }, 80);
+    speechSynthesis.cancel();
+    // Пауза после cancel — обход бага Chrome/Android, когда речь «проглатывается»
+    setTimeout(() => {
+      try {
+        pickVoice();
+        const u = new SpeechSynthesisUtterance(text);
+        u.lang = "ru-RU";
+        if (ruVoice) u.voice = ruVoice;
+        u.rate = 1.0;
+        u.pitch = 0.9;
+        u.volume = 1.0;
+        speechSynthesis.speak(u);
+        setTimeout(() => { try { speechSynthesis.resume(); } catch (e) {} }, 120);
+      } catch (e) {}
+    }, 70);
   } catch (e) { /* озвучка не критична */ }
 }
 
