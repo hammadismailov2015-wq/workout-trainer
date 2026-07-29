@@ -221,6 +221,7 @@ body {
 @keyframes sqDown { 0%,100% { transform: rotate(0); } 50% { transform: rotate(40deg); } }
 .squat-mode #sq-upper { transform-box: view-box; transform-origin: 100px 132px; animation: sqUpright 1.5s ease-in-out infinite; }
 @keyframes sqUpright { 0%,100% { transform: rotate(0); } 50% { transform: rotate(-34deg); } }
+.squat-mode #sq-thigh-far { transform-box: view-box; transform-origin: 110px 174px; animation: sqDown 1.5s ease-in-out infinite; }
 
 /* Пресс — корпус поднимается к коленям (скручивание) */
 .crunch-mode #ab-torso { transform-box: view-box; transform-origin: 106px 196px; animation: abUp 1.4s ease-in-out infinite; }
@@ -230,13 +231,13 @@ body {
 .legraise-mode #lr-legs { transform-box: view-box; transform-origin: 120px 198px; animation: lrLift 1.6s ease-in-out infinite; }
 @keyframes lrLift { 0%,100% { transform: rotate(-6deg); } 50% { transform: rotate(-80deg); } }
 
-/* Стульчик — держит сидячую позу у стены, лёгкое напряжение */
-.wallsit-mode #ws-all { animation: wsHold .5s ease-in-out infinite; }
-@keyframes wsHold { 0%,100% { transform: translateY(0); } 50% { transform: translateY(1.5px); } }
+/* Стульчик — статичное удержание позы у стены, дрожь от напряжения */
+.wallsit-mode #ws-all { animation: wsHold .16s ease-in-out infinite; }
+@keyframes wsHold { 0% { transform: translate(0,0); } 25% { transform: translate(-.8px,.6px); } 50% { transform: translate(.8px,0); } 75% { transform: translate(-.5px,.8px); } 100% { transform: translate(0,0); } }
 
-/* Выпады — присед вниз-вверх (задняя нога к полу) */
-.lunge-mode #ln-all { animation: lnDip 1.5s ease-in-out infinite; }
-@keyframes lnDip { 0%,100% { transform: translateY(0); } 50% { transform: translateY(16px); } }
+/* Выпады — верх опускается (колени сгибаются), стопы на полу */
+.lunge-mode #ln-all { animation: lnDip 1.35s ease-in-out infinite; }
+@keyframes lnDip { 0%,100% { transform: translateY(-2px); } 50% { transform: translateY(20px); } }
 
 /* Прыжки / джампинг-джек */
 .anim-jump #r-body { animation: hop .6s ease-in-out infinite; }
