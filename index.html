@@ -701,21 +701,21 @@
             <linearGradient id="brmetal" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f1f5f9"/><stop offset=".5" stop-color="#94a3b8"/><stop offset="1" stop-color="#475569"/></linearGradient>
             <linearGradient id="brmetal2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cbd5e1"/><stop offset="1" stop-color="#334155"/></linearGradient>
           </defs>
-          <line x1="24" y1="210" x2="176" y2="210" stroke="#334155" stroke-width="4" stroke-linecap="round"/>
-          <!-- голова и плечи на полу (слева) -->
-          <line x1="52" y1="190" x2="44" y2="182" stroke="#94a3b8" stroke-width="3"/>
-          <circle class="r-antenna" cx="42" cy="179" r="5" fill="#22d3ee"/>
-          <rect x="32" y="184" width="28" height="24" rx="12" fill="url(#brmetal)" stroke="#cbd5e1" stroke-width="1.5"/>
-          <circle class="r-eye" cx="45" cy="192" r="6" fill="#22d3ee"/><circle cx="44" cy="191" r="2.2" fill="#ecfeff"/>
-          <rect x="56" y="196" width="20" height="12" rx="5" fill="url(#brmetal2)"/> <!-- плечи на полу -->
-          <!-- стопы на полу (справа) -->
-          <rect x="120" y="200" width="26" height="9" rx="4" fill="#1e293b"/>
-          <rect x="124" y="176" width="14" height="28" rx="6" fill="url(#brmetal2)"/> <!-- голень -->
-          <!-- поднимающаяся часть: корпус + таз + бёдра (арка) -->
+          <line x1="24" y1="212" x2="176" y2="212" stroke="#334155" stroke-width="4" stroke-linecap="round"/>
+          <!-- голова + плечи на полу (слева) -->
+          <line x1="50" y1="196" x2="42" y2="188" stroke="#94a3b8" stroke-width="3"/>
+          <circle class="r-antenna" cx="40" cy="185" r="5" fill="#22d3ee"/>
+          <rect x="30" y="190" width="28" height="22" rx="11" fill="url(#brmetal)" stroke="#cbd5e1" stroke-width="1.5"/>
+          <circle class="r-eye" cx="44" cy="198" r="6" fill="#22d3ee"/><circle cx="43" cy="197" r="2.2" fill="#ecfeff"/>
+          <rect x="52" y="198" width="20" height="13" rx="6" fill="url(#brmetal2)"/> <!-- плечи на полу -->
+          <!-- голень (вертикально) + стопа на полу (справа) -->
+          <rect x="130" y="176" width="14" height="34" rx="7" fill="url(#brmetal2)"/>
+          <rect x="122" y="204" width="28" height="9" rx="4" fill="#1e293b"/>
+          <!-- поднимающаяся часть: прямой корпус до таза + бедро до колена -->
           <g id="br-lift">
-            <path d="M62,198 Q66,168 100,164 Q126,162 130,184 L118,188 Q112,174 96,178 Q78,182 74,200 Z"
-                  fill="url(#brmetal)" stroke="#cbd5e1" stroke-width="1.5"/>
-            <circle class="r-chest" cx="86" cy="182" r="5" fill="#22d3ee"/>
+            <rect x="62" y="190" width="56" height="15" rx="7" fill="url(#brmetal)" stroke="#cbd5e1" stroke-width="1.2" transform="rotate(-33 64 197)"/>  <!-- корпус: плечи→таз -->
+            <rect x="106" y="161" width="36" height="15" rx="7" fill="url(#brmetal)" stroke="#cbd5e1" stroke-width="1.2" transform="rotate(26 108 168)"/>   <!-- бедро: таз→колено -->
+            <circle class="r-chest" cx="88" cy="180" r="5" fill="#22d3ee"/>
           </g>
         </svg>
 
