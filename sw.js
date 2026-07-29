@@ -1,6 +1,6 @@
 // Service worker — сеть в приоритете, кэш только как офлайн-резерв.
 // (Раньше был «сначала кэш» — из-за него не подтягивались обновления.)
-const CACHE = "trainer-v5";
+const CACHE = "trainer-v6";
 const CLIPS = ["ready","rest","done","pause","voiceon",
   "work_squats","work_pushups","work_abs","work_plank","work_lunges","work_burpee",
   "work_jumpjack","work_mountain","work_legraise","work_highknees","work_superman",
