@@ -9,14 +9,14 @@ const EXERCISES = {
   pushups:   { name: "Отжимания",      ico: "💪", cal: 8,  anim: "pushup" },
   abs:       { name: "Пресс",          ico: "🔥", cal: 7,  anim: "crunch" },
   plank:     { name: "Планка",         ico: "🧘", cal: 5,  anim: "plank" },
-  lunges:    { name: "Выпады",         ico: "🚶", cal: 8,  anim: "squat" },
-  burpee:    { name: "Бёрпи",          ico: "⚡", cal: 12, anim: "jump" },
+  lunges:    { name: "Выпады",         ico: "🚶", cal: 8,  anim: "lunge" },
+  burpee:    { name: "Бёрпи",          ico: "⚡", cal: 12, anim: "burpee" },
   jumpjack:  { name: "Джампинг-джек",  ico: "🤸", cal: 10, anim: "jump" },
   mountain:  { name: "Скалолаз",       ico: "⛰️", cal: 10, anim: "mountain" },
   legraise:  { name: "Подъём ног",     ico: "🦿", cal: 6,  anim: "legraise" },
   highknees: { name: "Бег с колен.",   ico: "🏃", cal: 11, anim: "run" },
   superman:  { name: "Супермен",       ico: "🦸", cal: 5,  anim: "superman" },
-  wallsit:   { name: "Стульчик",       ico: "🪑", cal: 6,  anim: "squat" },
+  wallsit:   { name: "Стульчик",       ico: "🪑", cal: 6,  anim: "wallsit" },
 };
 
 // --- Готовые программы ---
@@ -243,11 +243,13 @@ const SIDE_MODES = {
   squatside: "squat-mode",
   crunch: "crunch-mode",
   legraise: "legraise-mode",
+  wallsit: "wallsit-mode",
+  lunge: "lunge-mode",
 };
 function setRobotAnim(anim) {
   const robot = document.getElementById("robot");
   const stage = document.getElementById("robot-stage");
-  stage.classList.remove("pushup-mode", "plank-mode", "mountain-mode", "superman-mode", "squat-mode", "crunch-mode", "legraise-mode");
+  stage.classList.remove("pushup-mode", "plank-mode", "mountain-mode", "superman-mode", "squat-mode", "crunch-mode", "legraise-mode", "wallsit-mode", "lunge-mode");
   if (SIDE_MODES[anim]) {
     stage.classList.add(SIDE_MODES[anim]);     // профильный робот
   } else if (robot) {

@@ -185,12 +185,15 @@ body {
 /* Профильные роботы (лицом/животом к полу): отжимания, планка, скалолаз, супермен */
 .robot-side { display: none; height: 195px; width: auto; overflow: visible; }
 .pushup-mode #robot, .plank-mode #robot, .mountain-mode #robot, .superman-mode #robot,
-.squat-mode #robot, .crunch-mode #robot, .legraise-mode #robot { display: none; }
+.squat-mode #robot, .crunch-mode #robot, .legraise-mode #robot,
+.wallsit-mode #robot, .lunge-mode #robot { display: none; }
 .pushup-mode #robot-pushup, .plank-mode #robot-pushup, .mountain-mode #robot-pushup { display: block; }
 .superman-mode #robot-superman { display: block; }
 .squat-mode #robot-squat { display: block; }
 .crunch-mode #robot-crunch { display: block; }
 .legraise-mode #robot-legraise { display: block; }
+.wallsit-mode #robot-wallsit { display: block; }
+.lunge-mode #robot-lunge { display: block; }
 
 /* голова свисает вниз, глаз смотрит в пол */
 #pu-head { transform-box: fill-box; transform-origin: 6% 42%; transform: rotate(40deg); }
@@ -213,9 +216,11 @@ body {
 .superman-mode #sm-lift { animation: smFly 1.6s ease-in-out infinite; }
 @keyframes smFly { 0%,100% { transform: translateY(7px); } 50% { transform: translateY(-7px); } }
 
-/* Приседание — сгибается в колене, корпус опускается (руки вперёд) */
+/* Приседание — сгибается в колене, корпус опускается, но остаётся прямым */
 .squat-mode #sq-thigh { transform-box: view-box; transform-origin: 100px 174px; animation: sqDown 1.5s ease-in-out infinite; }
-@keyframes sqDown { 0%,100% { transform: rotate(0); } 50% { transform: rotate(34deg); } }
+@keyframes sqDown { 0%,100% { transform: rotate(0); } 50% { transform: rotate(40deg); } }
+.squat-mode #sq-upper { transform-box: view-box; transform-origin: 100px 132px; animation: sqUpright 1.5s ease-in-out infinite; }
+@keyframes sqUpright { 0%,100% { transform: rotate(0); } 50% { transform: rotate(-34deg); } }
 
 /* Пресс — корпус поднимается к коленям (скручивание) */
 .crunch-mode #ab-torso { transform-box: view-box; transform-origin: 106px 196px; animation: abUp 1.4s ease-in-out infinite; }
@@ -224,6 +229,14 @@ body {
 /* Подъём ног — прямые ноги поднимаются от бедра вверх и опускаются */
 .legraise-mode #lr-legs { transform-box: view-box; transform-origin: 120px 198px; animation: lrLift 1.6s ease-in-out infinite; }
 @keyframes lrLift { 0%,100% { transform: rotate(-6deg); } 50% { transform: rotate(-80deg); } }
+
+/* Стульчик — держит сидячую позу у стены, лёгкое напряжение */
+.wallsit-mode #ws-all { animation: wsHold .5s ease-in-out infinite; }
+@keyframes wsHold { 0%,100% { transform: translateY(0); } 50% { transform: translateY(1.5px); } }
+
+/* Выпады — присед вниз-вверх (задняя нога к полу) */
+.lunge-mode #ln-all { animation: lnDip 1.5s ease-in-out infinite; }
+@keyframes lnDip { 0%,100% { transform: translateY(0); } 50% { transform: translateY(16px); } }
 
 /* Прыжки / джампинг-джек */
 .anim-jump #r-body { animation: hop .6s ease-in-out infinite; }
@@ -249,14 +262,32 @@ body {
 .anim-hold #r-body { animation: hold .8s ease-in-out infinite; }
 @keyframes hold { 0%,100% { transform: translateY(0) rotate(0); } 25% { transform: translateY(-1.5px) rotate(.8deg); } 75% { transform: translateY(1.5px) rotate(-.8deg); } }
 
-/* Бег / скалолаз (поочерёдно) */
-.anim-run #r-body { animation: hop .5s ease-in-out infinite; }
-.anim-run #r-leg-l { animation: knee .5s ease-in-out infinite; }
-.anim-run #r-leg-r { animation: knee .5s ease-in-out infinite; animation-delay: -.25s; }
-@keyframes knee { 0%,100% { transform: rotate(4deg); } 50% { transform: rotate(-46deg); } }
-.anim-run #r-arm-l { animation: swing .5s ease-in-out infinite; animation-delay: -.25s; }
-.anim-run #r-arm-r { animation: swing .5s ease-in-out infinite; }
-@keyframes swing { 0%,100% { transform: rotate(-18deg); } 50% { transform: rotate(30deg); } }
+/* Бег с высоким подниманием колен (поочерёдно, колени высоко) */
+.anim-run #r-body { animation: hop .46s ease-in-out infinite; }
+.anim-run #r-leg-l { animation: knee .46s ease-in-out infinite; }
+.anim-run #r-leg-r { animation: knee .46s ease-in-out infinite; animation-delay: -.23s; }
+@keyframes knee { 0%,100% { transform: rotate(6deg); } 50% { transform: rotate(-72deg); } }
+.anim-run #r-arm-l { animation: swing .46s ease-in-out infinite; animation-delay: -.23s; }
+.anim-run #r-arm-r { animation: swing .46s ease-in-out infinite; }
+@keyframes swing { 0%,100% { transform: rotate(-24deg); } 50% { transform: rotate(42deg); } }
+
+/* Бёрпи — присед вниз, затем прыжок вверх с руками над головой */
+.anim-burpee #r-body { animation: burpBody 1.35s ease-in-out infinite; }
+@keyframes burpBody {
+  0% { transform: translateY(0); }
+  30% { transform: translateY(24px) scaleY(.86); }   /* присед */
+  50% { transform: translateY(24px) scaleY(.86); }
+  72% { transform: translateY(-22px); }              /* прыжок */
+  100% { transform: translateY(0); }
+}
+.anim-burpee #r-arm-l { animation: burpArmL 1.35s ease-in-out infinite; }
+.anim-burpee #r-arm-r { animation: burpArmR 1.35s ease-in-out infinite; }
+@keyframes burpArmL { 0%,50% { transform: rotate(6deg); } 72%,85% { transform: rotate(165deg); } 100% { transform: rotate(6deg); } }
+@keyframes burpArmR { 0%,50% { transform: rotate(-6deg); } 72%,85% { transform: rotate(-165deg); } 100% { transform: rotate(-6deg); } }
+.anim-burpee #r-leg-l { animation: burpLegL 1.35s ease-in-out infinite; }
+.anim-burpee #r-leg-r { animation: burpLegR 1.35s ease-in-out infinite; }
+@keyframes burpLegL { 0%,100% { transform: rotate(0); } 30%,50% { transform: rotate(-10deg); } }
+@keyframes burpLegR { 0%,100% { transform: rotate(0); } 30%,50% { transform: rotate(10deg); } }
 
 @media (prefers-reduced-motion: reduce) {
   .robot *, .r-shadow { animation: none !important; }

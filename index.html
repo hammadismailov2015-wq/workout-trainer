@@ -363,6 +363,78 @@
             <rect x="188" y="188" width="12" height="20" rx="4" fill="#1e293b"/>                    <!-- стопа -->
           </g>
         </svg>
+        <!-- Стульчик: сидит спиной к стене, бёдра горизонтально (удержание) -->
+        <svg class="robot-side" id="robot-wallsit" viewBox="0 0 200 250" aria-hidden="true">
+          <defs>
+            <linearGradient id="wmetal" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#f1f5f9"/><stop offset=".5" stop-color="#94a3b8"/><stop offset="1" stop-color="#475569"/>
+            </linearGradient>
+            <linearGradient id="wmetal2" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#cbd5e1"/><stop offset="1" stop-color="#334155"/>
+            </linearGradient>
+          </defs>
+          <rect x="150" y="58" width="10" height="150" rx="3" fill="#475569"/> <!-- стена -->
+          <line x1="40" y1="208" x2="150" y2="208" stroke="#334155" stroke-width="4" stroke-linecap="round"/>
+          <g id="ws-all">
+            <!-- дальняя нога (темнее) -->
+            <g opacity=".9">
+              <rect x="96" y="168" width="48" height="13" rx="6" fill="url(#wmetal2)"/>
+              <rect x="94" y="172" width="13" height="34" rx="6" fill="url(#wmetal2)"/>
+            </g>
+            <!-- стопа -->
+            <rect x="80" y="200" width="30" height="9" rx="4" fill="#1e293b"/>
+            <!-- голень вертикально -->
+            <rect x="90" y="170" width="15" height="38" rx="7" fill="url(#wmetal)"/>
+            <!-- бедро горизонтально -->
+            <rect x="94" y="164" width="52" height="16" rx="8" fill="url(#wmetal)"/>
+            <circle cx="99" cy="172" r="6" fill="#334155"/> <!-- колено -->
+            <!-- корпус вертикально, спиной к стене -->
+            <rect x="132" y="110" width="22" height="60" rx="9" fill="url(#wmetal)" stroke="#cbd5e1" stroke-width="1.5"/>
+            <circle class="r-chest" cx="143" cy="130" r="5" fill="#22d3ee"/>
+            <!-- рука на бедре -->
+            <rect x="104" y="150" width="40" height="11" rx="5" fill="url(#wmetal2)"/>
+            <!-- голова -->
+            <line x1="143" y1="82" x2="143" y2="94" stroke="#94a3b8" stroke-width="3"/>
+            <circle class="r-antenna" cx="143" cy="78" r="5" fill="#22d3ee"/>
+            <rect x="127" y="82" width="32" height="30" rx="13" fill="url(#wmetal)" stroke="#cbd5e1" stroke-width="1.5"/>
+            <circle class="r-eye" cx="134" cy="97" r="6.5" fill="#22d3ee"/>
+            <circle cx="132" cy="96" r="2.3" fill="#ecfeff"/>
+          </g>
+        </svg>
+        <!-- Выпады: нога вперёд согнута, задняя назад; приседание вниз-вверх -->
+        <svg class="robot-side" id="robot-lunge" viewBox="0 0 200 250" aria-hidden="true">
+          <defs>
+            <linearGradient id="nmetal" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#f1f5f9"/><stop offset=".5" stop-color="#94a3b8"/><stop offset="1" stop-color="#475569"/>
+            </linearGradient>
+            <linearGradient id="nmetal2" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#cbd5e1"/><stop offset="1" stop-color="#334155"/>
+            </linearGradient>
+          </defs>
+          <line x1="24" y1="212" x2="176" y2="212" stroke="#334155" stroke-width="4" stroke-linecap="round"/>
+          <g id="ln-all">
+            <!-- задняя нога (назад-вниз, слева) -->
+            <rect x="66" y="146" width="40" height="13" rx="6" fill="url(#nmetal2)" transform="rotate(-42 104 152)"/>
+            <rect x="58" y="172" width="13" height="36" rx="6" fill="url(#nmetal2)" transform="rotate(-20 66 176)"/>
+            <rect x="46" y="204" width="24" height="9" rx="4" fill="#1e293b"/>
+            <!-- передняя нога (вперёд, согнута, справа) -->
+            <rect x="100" y="146" width="36" height="14" rx="7" fill="url(#nmetal)" transform="rotate(40 104 152)"/>
+            <rect x="122" y="176" width="15" height="36" rx="7" fill="url(#nmetal)"/>
+            <rect x="118" y="205" width="28" height="9" rx="4" fill="#1e293b"/>
+            <circle cx="129" cy="178" r="6" fill="#334155"/>
+            <!-- корпус вертикально -->
+            <rect x="92" y="106" width="24" height="46" rx="11" fill="url(#nmetal)" stroke="#cbd5e1" stroke-width="1.5"/>
+            <circle class="r-chest" cx="104" cy="126" r="5.5" fill="#22d3ee"/>
+            <!-- рука вдоль тела -->
+            <rect x="99" y="120" width="12" height="34" rx="6" fill="url(#nmetal2)" transform="rotate(6 105 122)"/>
+            <!-- голова -->
+            <line x1="104" y1="76" x2="104" y2="88" stroke="#94a3b8" stroke-width="3"/>
+            <circle class="r-antenna" cx="104" cy="72" r="5" fill="#22d3ee"/>
+            <rect x="89" y="76" width="32" height="31" rx="13" fill="url(#nmetal)" stroke="#cbd5e1" stroke-width="1.5"/>
+            <circle class="r-eye" cx="113" cy="91" r="6.5" fill="#22d3ee"/>
+            <circle cx="115" cy="90" r="2.3" fill="#ecfeff"/>
+          </g>
+        </svg>
       </div>
       <h2 class="exercise-name" id="ex-name">Разминка</h2>
       <div class="timer-ring">
