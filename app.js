@@ -17,6 +17,11 @@ const EXERCISES = {
   highknees: { name: "Бег с колен.",   ico: "🏃", cal: 11, anim: "run" },
   superman:  { name: "Супермен",       ico: "🦸", cal: 5,  anim: "superman" },
   wallsit:   { name: "Стульчик",       ico: "🪑", cal: 6,  anim: "wallsit" },
+  jumpsquat: { name: "Выпрыгивания",   ico: "🦿", cal: 12, anim: "jumpsquat" },
+  calfraise: { name: "Подъём на носки", ico: "🦶", cal: 5,  anim: "calfraise" },
+  skater:    { name: "Прыжки в стороны", ico: "⛸️", cal: 11, anim: "skater" },
+  bridge:    { name: "Ягодичный мостик", ico: "🍑", cal: 7,  anim: "bridge" },
+  scissors:  { name: "Ножницы",        ico: "✂️", cal: 8,  anim: "scissors" },
   // --- На тренировке (тренажёры) ---
   treadmill: { name: "Беговая дорожка", ico: "🏃", cal: 11, anim: "treadmill" },
   pullups:   { name: "Турник",          ico: "🤸", cal: 9,  anim: "pullup" },
@@ -31,14 +36,14 @@ const EXERCISES = {
 const PROGRAMS = [
   { id: "full",    emoji: "🔥", name: "Всё тело",       meta: "12 мин · для всех",
     work: 40, rest: 20, rounds: 2, ex: ["jumpjack","squats","pushups","abs","lunges","plank"] },
-  { id: "abs",     emoji: "🔥", name: "Пресс и кор",    meta: "8 мин · средне",
-    work: 40, rest: 15, rounds: 2, ex: ["abs","plank","legraise","mountain","superman"] },
-  { id: "legs",    emoji: "🦵", name: "Ноги и ягодицы", meta: "10 мин · средне",
-    work: 45, rest: 15, rounds: 2, ex: ["squats","lunges","wallsit","highknees"] },
+  { id: "abs",     emoji: "🔥", name: "Пресс и кор",    meta: "9 мин · средне",
+    work: 40, rest: 15, rounds: 2, ex: ["abs","plank","legraise","scissors","bridge","superman"] },
+  { id: "legs",    emoji: "🦵", name: "Ноги и ягодицы", meta: "11 мин · средне",
+    work: 45, rest: 15, rounds: 2, ex: ["squats","lunges","bridge","wallsit","calfraise","highknees"] },
   { id: "upper",   emoji: "💪", name: "Верх тела",      meta: "9 мин · средне",
     work: 40, rest: 20, rounds: 2, ex: ["pushups","plank","superman","mountain"] },
-  { id: "cardio",  emoji: "⚡", name: "Кардио-жиросжиг", meta: "10 мин · сложно",
-    work: 35, rest: 15, rounds: 3, ex: ["jumpjack","burpee","highknees","mountain"] },
+  { id: "cardio",  emoji: "⚡", name: "Кардио-жиросжиг", meta: "12 мин · сложно",
+    work: 35, rest: 15, rounds: 3, ex: ["jumpjack","burpee","jumpsquat","skater","highknees","mountain"] },
   { id: "quick",   emoji: "⏱️", name: "Быстрая 5 мин",  meta: "5 мин · разминка",
     work: 30, rest: 10, rounds: 1, ex: ["jumpjack","squats","pushups","abs","plank","lunges"] },
   { id: "gym",     emoji: "🏋️", name: "На тренировке",  meta: "тренажёры · 12 мин",
@@ -318,6 +323,8 @@ const SIDE_MODES = {
   jumprope: "jumprope-mode",
   kettlebell: "kettlebell-mode",
   barbell: "barbell-mode",
+  bridge: "bridge-mode",
+  scissors: "scissors-mode",
 };
 const ALL_MODES = Object.values(SIDE_MODES);
 function setRobotAnim(anim) {

@@ -695,6 +695,49 @@
           </g>
         </svg>
 
+        <!-- Ягодичный мостик: лёжа на спине, подъём таза -->
+        <svg class="robot-side" id="robot-bridge" viewBox="0 0 200 250" aria-hidden="true">
+          <defs>
+            <linearGradient id="brmetal" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f1f5f9"/><stop offset=".5" stop-color="#94a3b8"/><stop offset="1" stop-color="#475569"/></linearGradient>
+            <linearGradient id="brmetal2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cbd5e1"/><stop offset="1" stop-color="#334155"/></linearGradient>
+          </defs>
+          <line x1="24" y1="210" x2="176" y2="210" stroke="#334155" stroke-width="4" stroke-linecap="round"/>
+          <!-- голова и плечи на полу (слева) -->
+          <line x1="52" y1="190" x2="44" y2="182" stroke="#94a3b8" stroke-width="3"/>
+          <circle class="r-antenna" cx="42" cy="179" r="5" fill="#22d3ee"/>
+          <rect x="32" y="184" width="28" height="24" rx="12" fill="url(#brmetal)" stroke="#cbd5e1" stroke-width="1.5"/>
+          <circle class="r-eye" cx="45" cy="192" r="6" fill="#22d3ee"/><circle cx="44" cy="191" r="2.2" fill="#ecfeff"/>
+          <rect x="56" y="196" width="20" height="12" rx="5" fill="url(#brmetal2)"/> <!-- плечи на полу -->
+          <!-- стопы на полу (справа) -->
+          <rect x="120" y="200" width="26" height="9" rx="4" fill="#1e293b"/>
+          <rect x="124" y="176" width="14" height="28" rx="6" fill="url(#brmetal2)"/> <!-- голень -->
+          <!-- поднимающаяся часть: корпус + таз + бёдра (арка) -->
+          <g id="br-lift">
+            <path d="M62,198 Q66,168 100,164 Q126,162 130,184 L118,188 Q112,174 96,178 Q78,182 74,200 Z"
+                  fill="url(#brmetal)" stroke="#cbd5e1" stroke-width="1.5"/>
+            <circle class="r-chest" cx="86" cy="182" r="5" fill="#22d3ee"/>
+          </g>
+        </svg>
+
+        <!-- Ножницы: лёжа на спине, махи прямыми ногами -->
+        <svg class="robot-side" id="robot-scissors" viewBox="0 0 200 250" aria-hidden="true">
+          <defs>
+            <linearGradient id="scmetal" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f1f5f9"/><stop offset=".5" stop-color="#94a3b8"/><stop offset="1" stop-color="#475569"/></linearGradient>
+            <linearGradient id="scmetal2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cbd5e1"/><stop offset="1" stop-color="#334155"/></linearGradient>
+          </defs>
+          <line x1="22" y1="208" x2="178" y2="208" stroke="#334155" stroke-width="4" stroke-linecap="round"/>
+          <!-- голова на полу -->
+          <line x1="52" y1="192" x2="44" y2="184" stroke="#94a3b8" stroke-width="3"/>
+          <circle class="r-antenna" cx="42" cy="181" r="5" fill="#22d3ee"/>
+          <rect x="32" y="186" width="30" height="24" rx="12" fill="url(#scmetal)" stroke="#cbd5e1" stroke-width="1.5"/>
+          <circle class="r-eye" cx="45" cy="194" r="6" fill="#22d3ee"/><circle cx="44" cy="193" r="2.2" fill="#ecfeff"/>
+          <!-- корпус на полу, руки вдоль -->
+          <rect x="72" y="200" width="30" height="8" rx="4" fill="url(#scmetal2)"/>
+          <rect x="54" y="188" width="66" height="18" rx="9" fill="url(#scmetal)" stroke="#cbd5e1" stroke-width="1.5"/>
+          <!-- две прямые ноги, машут поочерёдно -->
+          <g id="sc-leg-b"><rect x="118" y="185" width="74" height="14" rx="7" fill="url(#scmetal2)"/><rect x="186" y="182" width="10" height="20" rx="4" fill="#1e293b"/></g>
+          <g id="sc-leg-a"><rect x="118" y="191" width="72" height="15" rx="7" fill="url(#scmetal)"/><rect x="184" y="188" width="11" height="20" rx="4" fill="#0f172a"/></g>
+        </svg>
       </div>
       <h2 class="exercise-name" id="ex-name">Разминка</h2>
       <div class="timer-ring">
